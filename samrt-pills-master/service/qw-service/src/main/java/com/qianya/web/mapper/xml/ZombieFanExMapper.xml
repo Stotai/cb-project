@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.web.mapper.ZombieFanExMapper">
+	<sql id="Base_Column_List">
+    fans_id, exrise_user_id, user_id, exrise_user_name, sex, cust_wx_id, cust_nick_name,
+    cust_head_url, add_time, delete_time, status, source, detection_time
+  </sql>
+
+
+	<!-- 在对应的Mapper XML文件中 -->
+	<select id="selectZombieFans" resultType="com.qianya.model.out.ZombieFanDtoOut">
+		SELECT
+		customer_id AS  fansId,
+		cust_wx_id AS custWxId,
+		eprise_wx_id AS exriseUserId,
+		eprise_wx_name AS exriseUserName,
+		cust_wx_name AS custNickName,
+		sex,
+		cust_wx_head_url AS custHeadUrl,
+		user_id AS userId,
+		create_time AS addTime,
+		zombie_delete_time AS deleteTime,
+		zombie_status AS status,
+		source
+		FROM customer
+
+		<where>
+			AND user_id =#{userId} and zombie_flag = 1
+			<if test="exriseUserIds != null and exriseUserIds.size() > 0">
+				AND exrise_user_id IN
+				<foreach item="exriseUserId" collection="exriseUserIds" open="(" separator="," close=")">
+					#{exriseUserId}
+				</foreach>
+			</if>
+			<if test="status != null">
+				AND zombie_status = #{status}
+			</if>
+
+			<if test="custNickName != null and custNickName != ''">
+				AND cust_wx_name LIKE CONCAT('%', #{custNickName}, '%')
+			</if>
+		</where>
+	</select>
+
+
+	<update id="batchEditZombieFans" >
+		UPDATE customer
+		SET zombie_status = #{opType}
+		<if test="deleteTime != null">
+			,zombie_delete_time = #{deleteTime}
+		</if>
+		WHERE cust_wx_id IN
+		<foreach item="fanId" collection="fanIds" open="(" separator="," close=")">
+			#{fanId}
+		</foreach>
+	</update>
+
+</mapper>

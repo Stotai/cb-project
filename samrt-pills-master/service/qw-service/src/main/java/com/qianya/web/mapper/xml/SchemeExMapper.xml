@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.web.mapper.SchemeExMapper">
+
+  <insert id="batchInsertSchemeItems" parameterType="java.util.List">
+    INSERT INTO scheme_item (scheme_id, item_type, item_content,wait_seconds, file_url, card_title, card_url, card_content, card_img_url, user_name, app_id, app_name, title, page_path, file_id, aes_key, md5, size, nick_name, video_desc, avatar, cover_url, feed_type, thumb_url, url, extras, group_ids,urge_exit_type,is_delete,sort)
+    VALUES
+    <foreach collection="items" item="itemEntity" separator=",">
+      (#{itemEntity.schemeId}, #{itemEntity.itemType}, #{itemEntity.itemContent},#{itemEntity.waitSeconds}, #{itemEntity.fileUrl},
+      #{itemEntity.cardTitle}, #{itemEntity.cardUrl}, #{itemEntity.cardContent}, #{itemEntity.cardImgUrl},
+      #{itemEntity.userName}, #{itemEntity.appId}, #{itemEntity.appName}, #{itemEntity.title}, #{itemEntity.pagePath},
+      #{itemEntity.fileId}, #{itemEntity.aesKey}, #{itemEntity.md5}, #{itemEntity.size}, #{itemEntity.nickName},
+      #{itemEntity.videoDesc}, #{itemEntity.avatar}, #{itemEntity.coverUrl}, #{itemEntity.feedType}, #{itemEntity.thumbUrl},
+      #{itemEntity.url}, #{itemEntity.extras}, #{itemEntity.groupIds},#{itemEntity.urgeExitType},#{itemEntity.isDelete},#{itemEntity.sort})
+    </foreach>
+  </insert>
+    <select id="getSchemeDraftDtoOutList" resultType="com.qianya.model.out.SchemeDraftDtoOut">
+
+      SELECT s.scheme_id AS  schemeId,
+             s.scheme_name   AS  schemeName,
+             u.phone  AS createUser,
+             s.create_time AS createTime
+             from scheme s  left join  `user` u on s.user_id=u.user_id
+             where s.user_id=#{userId} and s.save_type = 0
+          <if test="content !=null and content != ''">
+           AND  s.scheme_name LIKE CONCAT('%', #{content}, '%')
+          </if>
+          order by s.create_time desc
+    </select>
+
+</mapper>

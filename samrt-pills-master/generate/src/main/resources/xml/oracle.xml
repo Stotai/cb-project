@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration> <!-- 数据库驱动包位置 -->
+    <classPathEntry location="D:\apache-maven-3.5.4\repository\com\oracle\ojdbc6\1.0\ojdbc6-1.0.jar" />
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库链接URL、用户名、密码 jdbc:oracle:thin:@127.0.0.1:1521:orcl-->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@127.0.0.1:1521/orcl"
+                        userId="system" password="123456">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.liaoin.headlines.entity.pojo.school" targetProject="C:\">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="com.liaoin.headlines.dao.mybatis.school" targetProject="C:\">
+            <property name="enableSubPackages" value="true" /> </sqlMapGenerator>
+        <!-- 生成mapper的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.liaoin.headlines.dao.mybatis.school" targetProject="C:\">
+            <property name="enableSubPackages" value="true" /> </javaClientGenerator>
+        <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+
+        <table tableName="TB_VOLUNTEER" domainObjectName="Volunteer" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+     </context>
+</generatorConfiguration>
+

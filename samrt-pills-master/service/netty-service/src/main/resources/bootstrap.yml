@@ -1,0 +1,80 @@
+##读取配置参数
+config:
+  server-port: ${curr_port:8102}
+  app-name: netty-service
+  config-url: ${curr_nacos_url:39.106.133.60:8848}
+  namespace: ${curr_namespace:adf4d8bb-545f-4b6b-98a0-56d9a2aa2def}
+  group: DEFAULT_GROUP
+
+##框架配置
+spring:
+  profiles:
+    active: dev
+  application:
+    name: ${config.app-name}
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        server-addr: ${config.config-url}
+        file-extension: yml
+        namespace: ${config.namespace}
+        prefix: ${config.app-name}
+        group: ${config.group}
+      discovery:
+        server-addr: ${config.config-url}
+        namespace: ${config.namespace}
+        group: ${config.group}
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
+  freemarker:
+    cache: false
+    settings:
+      template_update_delay: 0
+  datasource:
+    url: jdbc:mysql://39.106.133.60:3306/cb_data?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: root
+    password: cb2023@.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 39.106.133.60
+    port: 6379
+    password: cb2023.@
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1
+  data:
+    mongodb:
+      uri: mongodb://root:cb2023%40.@39.106.133.60/cb_mongo?authSource=admin
+      maxConnectionIdleTimeMs: 60000 #TCP（socket）连接闲置时间，毫秒
+      maxConnectionLifeTimeMs: 300000 #TCP（socket）连接最多可以使用多久，毫秒
+      connectionsPerHost: 600 #线程池允许的最大连接数
+      minConnectionsPerHost: 1 #线程池空闲时保持的最小连接数
+  rabbitmq:
+    host: 39.106.133.60
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: my_vhost
+    connection-timeout: 6000
+    listener:
+      simple:
+        concurrency: 2
+        max-concurrency: 3
+        acknowledge-mode: manual # 手动应答
+        prefetch: 1 #每次从队列中取一个,轮询分发，默认是公平分发
+        retry:
+          max-attempts: 10000 #重试次数
+          enabled: true #是否开启重试
+mybatis:
+  mapper-locations: classpath:com/qianya/web/mapper/xml/*.xml,classpath:com/qianya/mapper/xml/*.xml
+server:
+  port: ${config.server-port}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.web.mapper.PullGroupExMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.qianya.entity.PullGroup">
+    <id column="pull_id" jdbcType="INTEGER" property="pullId" />
+    <result column="pull_name" jdbcType="VARCHAR" property="pullName" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="exrise_wx_id" jdbcType="VARCHAR" property="exriseWxId" />
+    <result column="exrise_wx_name" jdbcType="VARCHAR" property="exriseWxName" />
+    <result column="max_num" jdbcType="INTEGER" property="maxNum" />
+    <result column="day_max_num" jdbcType="INTEGER" property="dayMaxNum" />
+    <result column="send_count" jdbcType="INTEGER" property="sendCount" />
+    <result column="complete_count" jdbcType="INTEGER" property="completeCount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="complete_time" jdbcType="VARCHAR" property="completeTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    pull_id, pull_name, user_id, exrise_wx_id, exrise_wx_name, max_num, day_max_num,
+    send_count, complete_count, status, create_time, complete_time
+  </sql>
+
+  <insert id="batchInsertDetail" parameterType="java.util.List">
+    INSERT INTO pull_group_op_detail
+    (op_detail_id, pull_id, item_type, item_content, wait_seconds, file_url, card_title, card_url, card_content, card_img_url,
+    user_name, app_id, app_name, title, page_path, file_id, aes_key, md5, xcx_size, nick_name, video_desc, avatar, cover_url,
+    feed_type, thumb_url, url, extras, group_ids, is_delete, sort)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.opDetailId}, #{item.pullId}, #{item.itemType}, #{item.itemContent}, #{item.waitSeconds}, #{item.fileUrl},
+      #{item.cardTitle}, #{item.cardUrl}, #{item.cardContent}, #{item.cardImgUrl}, #{item.userName}, #{item.appId},
+      #{item.appName}, #{item.title}, #{item.pagePath}, #{item.fileId}, #{item.aesKey}, #{item.md5}, #{item.xcxSize},
+      #{item.nickName}, #{item.videoDesc}, #{item.avatar}, #{item.coverUrl}, #{item.feedType}, #{item.thumbUrl},
+      #{item.url}, #{item.extras}, #{item.groupIds}, #{item.isDelete}, #{item.sort})
+    </foreach>
+  </insert>
+
+
+  <insert id="batchInsertRelation" parameterType="java.util.List">
+    INSERT INTO pull_cust_relation
+          ( cust_wx_id, pull_id, status)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.custWxId}, #{item.pullId}, #{item.status}, #{item.sendTime})
+    </foreach>
+  </insert>
+
+  <!-- 根据企业微信id列表、拉群名称模糊查询分页数据 -->
+  <select id="findByExriseWxIdsAndPullName"  resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM pull_group
+    <where>
+      <if test="exriseWxIds != null and exriseWxIds.size() > 0">
+        AND exrise_wx_id IN
+        <foreach collection="exriseWxIds" item="exriseWxId" open="(" close=")" separator=",">
+          #{exriseWxId}
+        </foreach>
+      </if>
+      <if test="pullName != null and pullName != ''">
+        AND pull_name LIKE CONCAT('%', #{pullName}, '%')
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+    </where>
+     order by create_time desc
+  </select>
+
+
+</mapper>

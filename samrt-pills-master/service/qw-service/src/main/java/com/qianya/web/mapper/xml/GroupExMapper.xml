@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.web.mapper.GroupExMapper">
+
+
+  <resultMap id="BaseResultMap" type="com.qianya.entity.ExGroup">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_wx_id" jdbcType="VARCHAR" property="groupWxId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_img" jdbcType="VARCHAR" property="groupImg" />
+    <result column="exrise_user_id" jdbcType="VARCHAR" property="exriseUserId" />
+    <result column="group_type" jdbcType="INTEGER" property="groupType" />
+    <result column="cust_num" jdbcType="INTEGER" property="custNum" />
+    <result column="grouping_id" jdbcType="INTEGER" property="groupingId" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="group_qr_code" jdbcType="VARCHAR" property="groupQrCode" />
+  </resultMap>
+
+
+  <resultMap id="BaseCustResultMap" type="com.qianya.entity.GroupCust">
+    <id column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_wx_id" jdbcType="VARCHAR" property="groupWxId" />
+    <result column="cust_wx_id" jdbcType="VARCHAR" property="custWxId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="cust_wx_name" jdbcType="VARCHAR" property="custWxName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="cust_wx_head_url" jdbcType="VARCHAR" property="custWxHeadUrl" />
+    <result column="join_time" jdbcType="VARCHAR" property="joinTime" />
+    <result column="is_admin" jdbcType="INTEGER" property="isAdmin" />
+    <result column="invitations_times" jdbcType="INTEGER" property="invitationsTimes" />
+    <result column="invita_user_id" jdbcType="VARCHAR" property="invitaUserId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    group_id, group_wx_id, user_id, group_name, group_img, exrise_user_id, group_type,
+    cust_num, grouping_id, create_user_id, create_time, group_qr_code
+  </sql>
+
+  <sql id="Base_Cust_Column_List">
+    customer_id, group_id, group_wx_id,cust_wx_id, user_id, cust_wx_name, sex, cust_wx_head_url,
+    join_time, is_admin, invitations_times, invita_user_id
+  </sql>
+
+  <insert id="batchInsertGroups" parameterType="java.util.List">
+    INSERT INTO ex_group (group_wx_id, user_id, group_name, group_img, exrise_user_id, group_type, cust_num, grouping_id, create_user_id,create_time, group_qr_code)
+    VALUES
+    <foreach collection="groups" item="group" separator=",">
+      (#{group.groupWxId}, #{group.userId}, #{group.groupName}, #{group.groupImg}, #{group.exriseUserId}, #{group.groupType}, #{group.custNum}, #{group.groupingId},#{group.createUserId},
+      #{group.createTime}, #{group.groupQrCode})
+    </foreach>
+  </insert>
+  <insert id="insertBatchCust" parameterType="java.util.List">
+    INSERT INTO group_cust (group_id,group_wx_id, cust_wx_id, user_id,cust_wx_name, sex, cust_wx_head_url, join_time, is_admin, invitations_times, invita_user_id)
+    VALUES
+    <foreach collection="groupCustList" item="item" separator=",">
+      (#{item.groupId},#{item.groupWxId}, #{item.custWxId},#{item.userId}, #{item.custWxName}, #{item.sex}, #{item.custWxHeadUrl}, #{item.joinTime}, #{item.isAdmin}, #{item.invitationsTimes}, #{item.invitaUserId})
+    </foreach>
+  </insert>
+  <select id="queryGroupList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM ex_group
+    WHERE 1 = 1
+    and user_id =#{paramsDtoIn.userId} and exrise_user_id = #{paramsDtoIn.exriseUserId}
+    <if test="paramsDtoIn.startTime != null and paramsDtoIn.startTime != '' ">
+      AND create_time &gt;= #{paramsDtoIn.startTime}
+    </if>
+    <if test="paramsDtoIn.endTime != null and paramsDtoIn.endTime != '' ">
+      AND create_time &lt;= #{paramsDtoIn.endTime}
+    </if>
+    <if test="paramsDtoIn.isContain != null">
+    <if test="paramsDtoIn.isContain ==0">
+
+    <if test="paramsDtoIn.nickeName != null and paramsDtoIn.nickeName != '' ">
+      AND group_name LIKE CONCAT('%', #{paramsDtoIn.nickeName}, '%')
+    </if>
+    </if>
+    <if test="paramsDtoIn.isContain ==1">
+      <if test="paramsDtoIn.nickeName != null and paramsDtoIn.nickeName != '' ">
+        AND group_name not LIKE CONCAT('%', #{paramsDtoIn.nickeName}, '%')
+      </if>
+    </if>
+    </if>
+
+    <if test="paramsDtoIn.custNumStart != null">
+      AND cust_num &gt;= #{paramsDtoIn.custNumStart}
+    </if>
+    <if test="paramsDtoIn.custNumEnd != null">
+      AND cust_num &lt;= #{paramsDtoIn.custNumEnd}
+    </if>
+    <if test="paramsDtoIn.groupingId != null">
+      AND grouping_id = #{paramsDtoIn.groupingId}
+    </if>
+  </select>
+  <select id="selectGroupCustByParams" resultMap="BaseCustResultMap">
+    SELECT
+    <include refid="Base_Cust_Column_List" />
+    FROM group_cust
+    WHERE 1 = 1
+    <if test="paramsDtoIn.groupId != null">
+      AND group_id = #{paramsDtoIn.groupId}
+    </if>
+    <if test="paramsDtoIn.startTime != null and paramsDtoIn.startTime != '' ">
+      AND join_time &gt;= #{paramsDtoIn.startTime}
+    </if>
+    <if test="paramsDtoIn.endTime != null and paramsDtoIn.endTime != ''">
+      AND join_time &lt;= #{paramsDtoIn.endTime}
+    </if>
+    <if test="paramsDtoIn.isAdmin != null">
+      AND is_admin = #{paramsDtoIn.isAdmin}
+    </if>
+    <if test="paramsDtoIn.sex != null">
+      AND sex = #{paramsDtoIn.sex}
+    </if>
+    <if test="paramsDtoIn.nickeName != null and paramsDtoIn.nickeName != ''">
+      AND cust_wx_name LIKE CONCAT('%', #{paramsDtoIn.nickeName}, '%')
+    </if>
+    <if test="paramsDtoIn.sort != null and paramsDtoIn.sortType != null">
+      <choose>
+        <when test="paramsDtoIn.sort == 1">
+          ORDER BY invitations_times ${paramsDtoIn.sortType == 1 ? 'ASC' : 'DESC'}
+        </when>
+        <when test="paramsDtoIn.sort == 2">
+          ORDER BY join_time ${paramsDtoIn.sortType == 1 ? 'ASC' : 'DESC'}
+        </when>
+      </choose>
+    </if>
+  </select>
+
+
+
+</mapper>

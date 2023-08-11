@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.CricleDetailMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.CricleDetail">
+    <id column="cricle_detail_id" jdbcType="INTEGER" property="cricleDetailId" />
+    <result column="detail_type" jdbcType="INTEGER" property="detailType" />
+    <result column="item_type" jdbcType="INTEGER" property="itemType" />
+    <result column="cricle_id" jdbcType="INTEGER" property="cricleId" />
+    <result column="item_content" jdbcType="VARCHAR" property="itemContent" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="wait_seconds" jdbcType="INTEGER" property="waitSeconds" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="card_title" jdbcType="VARCHAR" property="cardTitle" />
+    <result column="card_url" jdbcType="VARCHAR" property="cardUrl" />
+    <result column="card_content" jdbcType="VARCHAR" property="cardContent" />
+    <result column="card_img_url" jdbcType="VARCHAR" property="cardImgUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cricle_detail_id, detail_type, item_type, cricle_id, item_content, sort, wait_seconds, 
+    file_url, card_title, card_url, card_content, card_img_url
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.CricleDetailCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cricle_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cricle_detail
+    where cricle_detail_id = #{cricleDetailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cricle_detail
+    where cricle_detail_id = #{cricleDetailId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.CricleDetailCriteria">
+    delete from cricle_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.CricleDetail">
+    insert into cricle_detail (cricle_detail_id, detail_type, item_type, 
+      cricle_id, item_content, sort, 
+      wait_seconds, file_url, card_title, 
+      card_url, card_content, card_img_url
+      )
+    values (#{cricleDetailId,jdbcType=INTEGER}, #{detailType,jdbcType=INTEGER}, #{itemType,jdbcType=INTEGER}, 
+      #{cricleId,jdbcType=INTEGER}, #{itemContent,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{waitSeconds,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, #{cardTitle,jdbcType=VARCHAR}, 
+      #{cardUrl,jdbcType=VARCHAR}, #{cardContent,jdbcType=VARCHAR}, #{cardImgUrl,jdbcType=VARCHAR}
+      )
+    <selectKey keyProperty="cricleDetailId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.CricleDetail">
+    insert into cricle_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cricleDetailId != null">
+        cricle_detail_id,
+      </if>
+      <if test="detailType != null">
+        detail_type,
+      </if>
+      <if test="itemType != null">
+        item_type,
+      </if>
+      <if test="cricleId != null">
+        cricle_id,
+      </if>
+      <if test="itemContent != null">
+        item_content,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="cardTitle != null">
+        card_title,
+      </if>
+      <if test="cardUrl != null">
+        card_url,
+      </if>
+      <if test="cardContent != null">
+        card_content,
+      </if>
+      <if test="cardImgUrl != null">
+        card_img_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cricleDetailId != null">
+        #{cricleDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="detailType != null">
+        #{detailType,jdbcType=INTEGER},
+      </if>
+      <if test="itemType != null">
+        #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="cricleId != null">
+        #{cricleId,jdbcType=INTEGER},
+      </if>
+      <if test="itemContent != null">
+        #{itemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="waitSeconds != null">
+        #{waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTitle != null">
+        #{cardTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cardUrl != null">
+        #{cardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardContent != null">
+        #{cardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImgUrl != null">
+        #{cardImgUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    <selectKey keyProperty="cricleDetailId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.CricleDetailCriteria" resultType="java.lang.Long">
+    select count(*) from cricle_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cricle_detail
+    <set>
+      <if test="record.cricleDetailId != null">
+        cricle_detail_id = #{record.cricleDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailType != null">
+        detail_type = #{record.detailType,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemType != null">
+        item_type = #{record.itemType,jdbcType=INTEGER},
+      </if>
+      <if test="record.cricleId != null">
+        cricle_id = #{record.cricleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemContent != null">
+        item_content = #{record.itemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.waitSeconds != null">
+        wait_seconds = #{record.waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileUrl != null">
+        file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardTitle != null">
+        card_title = #{record.cardTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardUrl != null">
+        card_url = #{record.cardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardContent != null">
+        card_content = #{record.cardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardImgUrl != null">
+        card_img_url = #{record.cardImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cricle_detail
+    set cricle_detail_id = #{record.cricleDetailId,jdbcType=INTEGER},
+      detail_type = #{record.detailType,jdbcType=INTEGER},
+      item_type = #{record.itemType,jdbcType=INTEGER},
+      cricle_id = #{record.cricleId,jdbcType=INTEGER},
+      item_content = #{record.itemContent,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      wait_seconds = #{record.waitSeconds,jdbcType=INTEGER},
+      file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      card_title = #{record.cardTitle,jdbcType=VARCHAR},
+      card_url = #{record.cardUrl,jdbcType=VARCHAR},
+      card_content = #{record.cardContent,jdbcType=VARCHAR},
+      card_img_url = #{record.cardImgUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.CricleDetail">
+    update cricle_detail
+    <set>
+      <if test="detailType != null">
+        detail_type = #{detailType,jdbcType=INTEGER},
+      </if>
+      <if test="itemType != null">
+        item_type = #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="cricleId != null">
+        cricle_id = #{cricleId,jdbcType=INTEGER},
+      </if>
+      <if test="itemContent != null">
+        item_content = #{itemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds = #{waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTitle != null">
+        card_title = #{cardTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cardUrl != null">
+        card_url = #{cardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardContent != null">
+        card_content = #{cardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImgUrl != null">
+        card_img_url = #{cardImgUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cricle_detail_id = #{cricleDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.CricleDetail">
+    update cricle_detail
+    set detail_type = #{detailType,jdbcType=INTEGER},
+      item_type = #{itemType,jdbcType=INTEGER},
+      cricle_id = #{cricleId,jdbcType=INTEGER},
+      item_content = #{itemContent,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      wait_seconds = #{waitSeconds,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      card_title = #{cardTitle,jdbcType=VARCHAR},
+      card_url = #{cardUrl,jdbcType=VARCHAR},
+      card_content = #{cardContent,jdbcType=VARCHAR},
+      card_img_url = #{cardImgUrl,jdbcType=VARCHAR}
+    where cricle_detail_id = #{cricleDetailId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into cricle_detail ( 
+    cricle_detail_id,
+    detail_type,
+    item_type,
+    cricle_id,
+    item_content,
+    sort,
+    wait_seconds,
+    file_url,
+    card_title,
+    card_url,
+    card_content,
+    card_img_url
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.cricleDetailId,jdbcType=INTEGER}, 
+         #{record.detailType,jdbcType=INTEGER}, 
+         #{record.itemType,jdbcType=INTEGER}, 
+         #{record.cricleId,jdbcType=INTEGER}, 
+         #{record.itemContent,jdbcType=VARCHAR}, 
+         #{record.sort,jdbcType=INTEGER}, 
+         #{record.waitSeconds,jdbcType=INTEGER}, 
+         #{record.fileUrl,jdbcType=VARCHAR}, 
+         #{record.cardTitle,jdbcType=VARCHAR}, 
+         #{record.cardUrl,jdbcType=VARCHAR}, 
+         #{record.cardContent,jdbcType=VARCHAR}, 
+         #{record.cardImgUrl,jdbcType=VARCHAR}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into cricle_detail ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].cricleDetailId != null">
+        cricle_detail_id,
+      </if>
+      <if test="recordColl[0].detailType != null">
+        detail_type,
+      </if>
+      <if test="recordColl[0].itemType != null">
+        item_type,
+      </if>
+      <if test="recordColl[0].cricleId != null">
+        cricle_id,
+      </if>
+      <if test="recordColl[0].itemContent != null">
+        item_content,
+      </if>
+      <if test="recordColl[0].sort != null">
+        sort,
+      </if>
+      <if test="recordColl[0].waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="recordColl[0].fileUrl != null">
+        file_url,
+      </if>
+      <if test="recordColl[0].cardTitle != null">
+        card_title,
+      </if>
+      <if test="recordColl[0].cardUrl != null">
+        card_url,
+      </if>
+      <if test="recordColl[0].cardContent != null">
+        card_content,
+      </if>
+      <if test="recordColl[0].cardImgUrl != null">
+        card_img_url,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.cricleDetailId != null">
+           #{record.cricleDetailId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.detailType != null">
+           #{record.detailType,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.itemType != null">
+           #{record.itemType,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.cricleId != null">
+           #{record.cricleId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.itemContent != null">
+           #{record.itemContent,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.sort != null">
+           #{record.sort,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.waitSeconds != null">
+           #{record.waitSeconds,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.fileUrl != null">
+           #{record.fileUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardTitle != null">
+           #{record.cardTitle,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardUrl != null">
+           #{record.cardUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardContent != null">
+           #{record.cardContent,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardImgUrl != null">
+           #{record.cardImgUrl,jdbcType=VARCHAR}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cricle_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

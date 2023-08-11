@@ -1,0 +1,10 @@
+# Project exclude paths
+/samrt-pills-master/generate/target/
+/samrt-pills-master/mapper/target/
+/samrt-pills-master/model/target/
+/samrt-pills-master/service/netty-service/target/
+/samrt-pills-master/service/qw-service/target/
+/samrt-pills-master/service/task-service/target/
+/samrt-pills-master/service/upload-service/target/
+/samrt-pills-master/util/target/
+/samrt-pills-master/zuul/target/

@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.ZombieConfigMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.ZombieConfig">
+    <id column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="auto_status" jdbcType="INTEGER" property="autoStatus" />
+    <result column="last_time" jdbcType="VARCHAR" property="lastTime" />
+    <result column="msg_status" jdbcType="INTEGER" property="msgStatus" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="delete_unit_s" jdbcType="INTEGER" property="deleteUnitS" />
+    <result column="delete_unit_e" jdbcType="INTEGER" property="deleteUnitE" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="add_content" jdbcType="VARCHAR" property="addContent" />
+    <result column="add_unit_s" jdbcType="INTEGER" property="addUnitS" />
+    <result column="add_unit_e" jdbcType="INTEGER" property="addUnitE" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    config_id, auto_status, last_time, msg_status, msg, delete_unit_s, delete_unit_e, 
+    user_id, create_time, update_time, add_content, add_unit_s, add_unit_e
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.ZombieConfigCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zombie_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zombie_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zombie_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.ZombieConfigCriteria">
+    delete from zombie_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.ZombieConfig">
+    insert into zombie_config (config_id, auto_status, last_time, 
+      msg_status, msg, delete_unit_s, 
+      delete_unit_e, user_id, create_time, 
+      update_time, add_content, add_unit_s, 
+      add_unit_e)
+    values (#{configId,jdbcType=INTEGER}, #{autoStatus,jdbcType=INTEGER}, #{lastTime,jdbcType=VARCHAR}, 
+      #{msgStatus,jdbcType=INTEGER}, #{msg,jdbcType=VARCHAR}, #{deleteUnitS,jdbcType=INTEGER}, 
+      #{deleteUnitE,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{addContent,jdbcType=VARCHAR}, #{addUnitS,jdbcType=INTEGER}, 
+      #{addUnitE,jdbcType=INTEGER})
+    <selectKey keyProperty="configId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.ZombieConfig">
+    insert into zombie_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="autoStatus != null">
+        auto_status,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="msgStatus != null">
+        msg_status,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="deleteUnitS != null">
+        delete_unit_s,
+      </if>
+      <if test="deleteUnitE != null">
+        delete_unit_e,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="addContent != null">
+        add_content,
+      </if>
+      <if test="addUnitS != null">
+        add_unit_s,
+      </if>
+      <if test="addUnitE != null">
+        add_unit_e,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="autoStatus != null">
+        #{autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgStatus != null">
+        #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteUnitS != null">
+        #{deleteUnitS,jdbcType=INTEGER},
+      </if>
+      <if test="deleteUnitE != null">
+        #{deleteUnitE,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addContent != null">
+        #{addContent,jdbcType=VARCHAR},
+      </if>
+      <if test="addUnitS != null">
+        #{addUnitS,jdbcType=INTEGER},
+      </if>
+      <if test="addUnitE != null">
+        #{addUnitE,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey keyProperty="configId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.ZombieConfigCriteria" resultType="java.lang.Long">
+    select count(*) from zombie_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zombie_config
+    <set>
+      <if test="record.configId != null">
+        config_id = #{record.configId,jdbcType=INTEGER},
+      </if>
+      <if test="record.autoStatus != null">
+        auto_status = #{record.autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastTime != null">
+        last_time = #{record.lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgStatus != null">
+        msg_status = #{record.msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.msg != null">
+        msg = #{record.msg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteUnitS != null">
+        delete_unit_s = #{record.deleteUnitS,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteUnitE != null">
+        delete_unit_e = #{record.deleteUnitE,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addContent != null">
+        add_content = #{record.addContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addUnitS != null">
+        add_unit_s = #{record.addUnitS,jdbcType=INTEGER},
+      </if>
+      <if test="record.addUnitE != null">
+        add_unit_e = #{record.addUnitE,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zombie_config
+    set config_id = #{record.configId,jdbcType=INTEGER},
+      auto_status = #{record.autoStatus,jdbcType=INTEGER},
+      last_time = #{record.lastTime,jdbcType=VARCHAR},
+      msg_status = #{record.msgStatus,jdbcType=INTEGER},
+      msg = #{record.msg,jdbcType=VARCHAR},
+      delete_unit_s = #{record.deleteUnitS,jdbcType=INTEGER},
+      delete_unit_e = #{record.deleteUnitE,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      add_content = #{record.addContent,jdbcType=VARCHAR},
+      add_unit_s = #{record.addUnitS,jdbcType=INTEGER},
+      add_unit_e = #{record.addUnitE,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.ZombieConfig">
+    update zombie_config
+    <set>
+      <if test="autoStatus != null">
+        auto_status = #{autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lastTime != null">
+        last_time = #{lastTime,jdbcType=VARCHAR},
+      </if>
+      <if test="msgStatus != null">
+        msg_status = #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteUnitS != null">
+        delete_unit_s = #{deleteUnitS,jdbcType=INTEGER},
+      </if>
+      <if test="deleteUnitE != null">
+        delete_unit_e = #{deleteUnitE,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="addContent != null">
+        add_content = #{addContent,jdbcType=VARCHAR},
+      </if>
+      <if test="addUnitS != null">
+        add_unit_s = #{addUnitS,jdbcType=INTEGER},
+      </if>
+      <if test="addUnitE != null">
+        add_unit_e = #{addUnitE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.ZombieConfig">
+    update zombie_config
+    set auto_status = #{autoStatus,jdbcType=INTEGER},
+      last_time = #{lastTime,jdbcType=VARCHAR},
+      msg_status = #{msgStatus,jdbcType=INTEGER},
+      msg = #{msg,jdbcType=VARCHAR},
+      delete_unit_s = #{deleteUnitS,jdbcType=INTEGER},
+      delete_unit_e = #{deleteUnitE,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      add_content = #{addContent,jdbcType=VARCHAR},
+      add_unit_s = #{addUnitS,jdbcType=INTEGER},
+      add_unit_e = #{addUnitE,jdbcType=INTEGER}
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into zombie_config ( 
+    config_id,
+    auto_status,
+    last_time,
+    msg_status,
+    msg,
+    delete_unit_s,
+    delete_unit_e,
+    user_id,
+    create_time,
+    update_time,
+    add_content,
+    add_unit_s,
+    add_unit_e
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.configId,jdbcType=INTEGER}, 
+         #{record.autoStatus,jdbcType=INTEGER}, 
+         #{record.lastTime,jdbcType=VARCHAR}, 
+         #{record.msgStatus,jdbcType=INTEGER}, 
+         #{record.msg,jdbcType=VARCHAR}, 
+         #{record.deleteUnitS,jdbcType=INTEGER}, 
+         #{record.deleteUnitE,jdbcType=INTEGER}, 
+         #{record.userId,jdbcType=INTEGER}, 
+         #{record.createTime,jdbcType=VARCHAR}, 
+         #{record.updateTime,jdbcType=VARCHAR}, 
+         #{record.addContent,jdbcType=VARCHAR}, 
+         #{record.addUnitS,jdbcType=INTEGER}, 
+         #{record.addUnitE,jdbcType=INTEGER}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into zombie_config ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].configId != null">
+        config_id,
+      </if>
+      <if test="recordColl[0].autoStatus != null">
+        auto_status,
+      </if>
+      <if test="recordColl[0].lastTime != null">
+        last_time,
+      </if>
+      <if test="recordColl[0].msgStatus != null">
+        msg_status,
+      </if>
+      <if test="recordColl[0].msg != null">
+        msg,
+      </if>
+      <if test="recordColl[0].deleteUnitS != null">
+        delete_unit_s,
+      </if>
+      <if test="recordColl[0].deleteUnitE != null">
+        delete_unit_e,
+      </if>
+      <if test="recordColl[0].userId != null">
+        user_id,
+      </if>
+      <if test="recordColl[0].createTime != null">
+        create_time,
+      </if>
+      <if test="recordColl[0].updateTime != null">
+        update_time,
+      </if>
+      <if test="recordColl[0].addContent != null">
+        add_content,
+      </if>
+      <if test="recordColl[0].addUnitS != null">
+        add_unit_s,
+      </if>
+      <if test="recordColl[0].addUnitE != null">
+        add_unit_e,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.configId != null">
+           #{record.configId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.autoStatus != null">
+           #{record.autoStatus,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.lastTime != null">
+           #{record.lastTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.msgStatus != null">
+           #{record.msgStatus,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.msg != null">
+           #{record.msg,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.deleteUnitS != null">
+           #{record.deleteUnitS,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.deleteUnitE != null">
+           #{record.deleteUnitE,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.userId != null">
+           #{record.userId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.createTime != null">
+           #{record.createTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.updateTime != null">
+           #{record.updateTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.addContent != null">
+           #{record.addContent,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.addUnitS != null">
+           #{record.addUnitS,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.addUnitE != null">
+           #{record.addUnitE,jdbcType=INTEGER}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zombie_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.GroupInviteConfigMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.GroupInviteConfig">
+    <id column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="auto_status" jdbcType="INTEGER" property="autoStatus" />
+    <result column="disturb_status" jdbcType="INTEGER" property="disturbStatus" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="pass_rate" jdbcType="VARCHAR" property="passRate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    config_id, auto_status, disturb_status, user_id, pass_rate
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.GroupInviteConfigCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from group_invite_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group_invite_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from group_invite_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.GroupInviteConfigCriteria">
+    delete from group_invite_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.GroupInviteConfig">
+    insert into group_invite_config (config_id, auto_status, disturb_status, 
+      user_id, pass_rate)
+    values (#{configId,jdbcType=INTEGER}, #{autoStatus,jdbcType=INTEGER}, #{disturbStatus,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{passRate,jdbcType=VARCHAR})
+    <selectKey keyProperty="configId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.GroupInviteConfig">
+    insert into group_invite_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="autoStatus != null">
+        auto_status,
+      </if>
+      <if test="disturbStatus != null">
+        disturb_status,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="passRate != null">
+        pass_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="autoStatus != null">
+        #{autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="disturbStatus != null">
+        #{disturbStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="passRate != null">
+        #{passRate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    <selectKey keyProperty="configId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.GroupInviteConfigCriteria" resultType="java.lang.Long">
+    select count(*) from group_invite_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update group_invite_config
+    <set>
+      <if test="record.configId != null">
+        config_id = #{record.configId,jdbcType=INTEGER},
+      </if>
+      <if test="record.autoStatus != null">
+        auto_status = #{record.autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.disturbStatus != null">
+        disturb_status = #{record.disturbStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.passRate != null">
+        pass_rate = #{record.passRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update group_invite_config
+    set config_id = #{record.configId,jdbcType=INTEGER},
+      auto_status = #{record.autoStatus,jdbcType=INTEGER},
+      disturb_status = #{record.disturbStatus,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      pass_rate = #{record.passRate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.GroupInviteConfig">
+    update group_invite_config
+    <set>
+      <if test="autoStatus != null">
+        auto_status = #{autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="disturbStatus != null">
+        disturb_status = #{disturbStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="passRate != null">
+        pass_rate = #{passRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.GroupInviteConfig">
+    update group_invite_config
+    set auto_status = #{autoStatus,jdbcType=INTEGER},
+      disturb_status = #{disturbStatus,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      pass_rate = #{passRate,jdbcType=VARCHAR}
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into group_invite_config ( 
+    config_id,
+    auto_status,
+    disturb_status,
+    user_id,
+    pass_rate
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.configId,jdbcType=INTEGER}, 
+         #{record.autoStatus,jdbcType=INTEGER}, 
+         #{record.disturbStatus,jdbcType=INTEGER}, 
+         #{record.userId,jdbcType=INTEGER}, 
+         #{record.passRate,jdbcType=VARCHAR}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into group_invite_config ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].configId != null">
+        config_id,
+      </if>
+      <if test="recordColl[0].autoStatus != null">
+        auto_status,
+      </if>
+      <if test="recordColl[0].disturbStatus != null">
+        disturb_status,
+      </if>
+      <if test="recordColl[0].userId != null">
+        user_id,
+      </if>
+      <if test="recordColl[0].passRate != null">
+        pass_rate,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.configId != null">
+           #{record.configId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.autoStatus != null">
+           #{record.autoStatus,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.disturbStatus != null">
+           #{record.disturbStatus,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.userId != null">
+           #{record.userId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.passRate != null">
+           #{record.passRate,jdbcType=VARCHAR}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from group_invite_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

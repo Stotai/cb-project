@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.UserConfigMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.UserConfig">
+    <id column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="auto_status" jdbcType="INTEGER" property="autoStatus" />
+    <result column="work_start_time" jdbcType="INTEGER" property="workStartTime" />
+    <result column="work_end_time" jdbcType="INTEGER" property="workEndTime" />
+    <result column="max_num" jdbcType="INTEGER" property="maxNum" />
+    <result column="wait_seconds" jdbcType="VARCHAR" property="waitSeconds" />
+    <result column="msg_wait_seconds" jdbcType="VARCHAR" property="msgWaitSeconds" />
+    <result column="verify_keywords" jdbcType="VARCHAR" property="verifyKeywords" />
+    <result column="verify_no_keywords" jdbcType="VARCHAR" property="verifyNoKeywords" />
+    <result column="nick_name_no_keywords" jdbcType="VARCHAR" property="nickNameNoKeywords" />
+    <result column="exrise_auto_status" jdbcType="INTEGER" property="exriseAutoStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    config_id, user_id, auto_status, work_start_time, work_end_time, max_num, wait_seconds, 
+    msg_wait_seconds, verify_keywords, verify_no_keywords, nick_name_no_keywords, exrise_auto_status
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.UserConfigCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_config
+    where config_id = #{configId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.UserConfigCriteria">
+    delete from user_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.UserConfig">
+    insert into user_config (config_id, user_id, auto_status, 
+      work_start_time, work_end_time, max_num, 
+      wait_seconds, msg_wait_seconds, verify_keywords, 
+      verify_no_keywords, nick_name_no_keywords, exrise_auto_status
+      )
+    values (#{configId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{autoStatus,jdbcType=INTEGER}, 
+      #{workStartTime,jdbcType=INTEGER}, #{workEndTime,jdbcType=INTEGER}, #{maxNum,jdbcType=INTEGER}, 
+      #{waitSeconds,jdbcType=VARCHAR}, #{msgWaitSeconds,jdbcType=VARCHAR}, #{verifyKeywords,jdbcType=VARCHAR}, 
+      #{verifyNoKeywords,jdbcType=VARCHAR}, #{nickNameNoKeywords,jdbcType=VARCHAR}, #{exriseAutoStatus,jdbcType=INTEGER}
+      )
+    <selectKey keyProperty="configId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.UserConfig">
+    insert into user_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        config_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="autoStatus != null">
+        auto_status,
+      </if>
+      <if test="workStartTime != null">
+        work_start_time,
+      </if>
+      <if test="workEndTime != null">
+        work_end_time,
+      </if>
+      <if test="maxNum != null">
+        max_num,
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="msgWaitSeconds != null">
+        msg_wait_seconds,
+      </if>
+      <if test="verifyKeywords != null">
+        verify_keywords,
+      </if>
+      <if test="verifyNoKeywords != null">
+        verify_no_keywords,
+      </if>
+      <if test="nickNameNoKeywords != null">
+        nick_name_no_keywords,
+      </if>
+      <if test="exriseAutoStatus != null">
+        exrise_auto_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="configId != null">
+        #{configId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="autoStatus != null">
+        #{autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="workStartTime != null">
+        #{workStartTime,jdbcType=INTEGER},
+      </if>
+      <if test="workEndTime != null">
+        #{workEndTime,jdbcType=INTEGER},
+      </if>
+      <if test="maxNum != null">
+        #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="waitSeconds != null">
+        #{waitSeconds,jdbcType=VARCHAR},
+      </if>
+      <if test="msgWaitSeconds != null">
+        #{msgWaitSeconds,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyKeywords != null">
+        #{verifyKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyNoKeywords != null">
+        #{verifyNoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="nickNameNoKeywords != null">
+        #{nickNameNoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseAutoStatus != null">
+        #{exriseAutoStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey keyProperty="configId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.UserConfigCriteria" resultType="java.lang.Long">
+    select count(*) from user_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_config
+    <set>
+      <if test="record.configId != null">
+        config_id = #{record.configId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.autoStatus != null">
+        auto_status = #{record.autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.workStartTime != null">
+        work_start_time = #{record.workStartTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.workEndTime != null">
+        work_end_time = #{record.workEndTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxNum != null">
+        max_num = #{record.maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.waitSeconds != null">
+        wait_seconds = #{record.waitSeconds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgWaitSeconds != null">
+        msg_wait_seconds = #{record.msgWaitSeconds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifyKeywords != null">
+        verify_keywords = #{record.verifyKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifyNoKeywords != null">
+        verify_no_keywords = #{record.verifyNoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickNameNoKeywords != null">
+        nick_name_no_keywords = #{record.nickNameNoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exriseAutoStatus != null">
+        exrise_auto_status = #{record.exriseAutoStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_config
+    set config_id = #{record.configId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      auto_status = #{record.autoStatus,jdbcType=INTEGER},
+      work_start_time = #{record.workStartTime,jdbcType=INTEGER},
+      work_end_time = #{record.workEndTime,jdbcType=INTEGER},
+      max_num = #{record.maxNum,jdbcType=INTEGER},
+      wait_seconds = #{record.waitSeconds,jdbcType=VARCHAR},
+      msg_wait_seconds = #{record.msgWaitSeconds,jdbcType=VARCHAR},
+      verify_keywords = #{record.verifyKeywords,jdbcType=VARCHAR},
+      verify_no_keywords = #{record.verifyNoKeywords,jdbcType=VARCHAR},
+      nick_name_no_keywords = #{record.nickNameNoKeywords,jdbcType=VARCHAR},
+      exrise_auto_status = #{record.exriseAutoStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.UserConfig">
+    update user_config
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="autoStatus != null">
+        auto_status = #{autoStatus,jdbcType=INTEGER},
+      </if>
+      <if test="workStartTime != null">
+        work_start_time = #{workStartTime,jdbcType=INTEGER},
+      </if>
+      <if test="workEndTime != null">
+        work_end_time = #{workEndTime,jdbcType=INTEGER},
+      </if>
+      <if test="maxNum != null">
+        max_num = #{maxNum,jdbcType=INTEGER},
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds = #{waitSeconds,jdbcType=VARCHAR},
+      </if>
+      <if test="msgWaitSeconds != null">
+        msg_wait_seconds = #{msgWaitSeconds,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyKeywords != null">
+        verify_keywords = #{verifyKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyNoKeywords != null">
+        verify_no_keywords = #{verifyNoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="nickNameNoKeywords != null">
+        nick_name_no_keywords = #{nickNameNoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseAutoStatus != null">
+        exrise_auto_status = #{exriseAutoStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.UserConfig">
+    update user_config
+    set user_id = #{userId,jdbcType=INTEGER},
+      auto_status = #{autoStatus,jdbcType=INTEGER},
+      work_start_time = #{workStartTime,jdbcType=INTEGER},
+      work_end_time = #{workEndTime,jdbcType=INTEGER},
+      max_num = #{maxNum,jdbcType=INTEGER},
+      wait_seconds = #{waitSeconds,jdbcType=VARCHAR},
+      msg_wait_seconds = #{msgWaitSeconds,jdbcType=VARCHAR},
+      verify_keywords = #{verifyKeywords,jdbcType=VARCHAR},
+      verify_no_keywords = #{verifyNoKeywords,jdbcType=VARCHAR},
+      nick_name_no_keywords = #{nickNameNoKeywords,jdbcType=VARCHAR},
+      exrise_auto_status = #{exriseAutoStatus,jdbcType=INTEGER}
+    where config_id = #{configId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into user_config ( 
+    config_id,
+    user_id,
+    auto_status,
+    work_start_time,
+    work_end_time,
+    max_num,
+    wait_seconds,
+    msg_wait_seconds,
+    verify_keywords,
+    verify_no_keywords,
+    nick_name_no_keywords,
+    exrise_auto_status
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.configId,jdbcType=INTEGER}, 
+         #{record.userId,jdbcType=INTEGER}, 
+         #{record.autoStatus,jdbcType=INTEGER}, 
+         #{record.workStartTime,jdbcType=INTEGER}, 
+         #{record.workEndTime,jdbcType=INTEGER}, 
+         #{record.maxNum,jdbcType=INTEGER}, 
+         #{record.waitSeconds,jdbcType=VARCHAR}, 
+         #{record.msgWaitSeconds,jdbcType=VARCHAR}, 
+         #{record.verifyKeywords,jdbcType=VARCHAR}, 
+         #{record.verifyNoKeywords,jdbcType=VARCHAR}, 
+         #{record.nickNameNoKeywords,jdbcType=VARCHAR}, 
+         #{record.exriseAutoStatus,jdbcType=INTEGER}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into user_config ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].configId != null">
+        config_id,
+      </if>
+      <if test="recordColl[0].userId != null">
+        user_id,
+      </if>
+      <if test="recordColl[0].autoStatus != null">
+        auto_status,
+      </if>
+      <if test="recordColl[0].workStartTime != null">
+        work_start_time,
+      </if>
+      <if test="recordColl[0].workEndTime != null">
+        work_end_time,
+      </if>
+      <if test="recordColl[0].maxNum != null">
+        max_num,
+      </if>
+      <if test="recordColl[0].waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="recordColl[0].msgWaitSeconds != null">
+        msg_wait_seconds,
+      </if>
+      <if test="recordColl[0].verifyKeywords != null">
+        verify_keywords,
+      </if>
+      <if test="recordColl[0].verifyNoKeywords != null">
+        verify_no_keywords,
+      </if>
+      <if test="recordColl[0].nickNameNoKeywords != null">
+        nick_name_no_keywords,
+      </if>
+      <if test="recordColl[0].exriseAutoStatus != null">
+        exrise_auto_status,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.configId != null">
+           #{record.configId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.userId != null">
+           #{record.userId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.autoStatus != null">
+           #{record.autoStatus,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.workStartTime != null">
+           #{record.workStartTime,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.workEndTime != null">
+           #{record.workEndTime,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.maxNum != null">
+           #{record.maxNum,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.waitSeconds != null">
+           #{record.waitSeconds,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.msgWaitSeconds != null">
+           #{record.msgWaitSeconds,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.verifyKeywords != null">
+           #{record.verifyKeywords,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.verifyNoKeywords != null">
+           #{record.verifyNoKeywords,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.nickNameNoKeywords != null">
+           #{record.nickNameNoKeywords,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.exriseAutoStatus != null">
+           #{record.exriseAutoStatus,jdbcType=INTEGER}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

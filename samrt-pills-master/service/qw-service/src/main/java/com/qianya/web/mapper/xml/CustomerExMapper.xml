@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.web.mapper.CustomerExMapper">
+
+  <resultMap id="BaseResultMap" type="com.qianya.entity.Customer">
+    <id column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="eprise_wx_id" jdbcType="VARCHAR" property="epriseWxId" />
+    <result column="eprise_wx_name" jdbcType="VARCHAR" property="epriseWxName" />
+    <result column="cust_wx_id" jdbcType="VARCHAR" property="custWxId" />
+    <result column="cust_wx_name" jdbcType="VARCHAR" property="custWxName" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="cust_wx_head_url" jdbcType="VARCHAR" property="custWxHeadUrl" />
+    <result column="verify_content" jdbcType="VARCHAR" property="verifyContent" />
+    <result column="add_type" jdbcType="INTEGER" property="addType" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="zombie_flag" jdbcType="INTEGER" property="zombieFlag" />
+    <result column="zombie_delete_time" jdbcType="VARCHAR" property="zombieDeleteTime" />
+    <result column="zombie_status" jdbcType="INTEGER" property="zombieStatus" />
+    <result column="source" jdbcType="INTEGER" property="source" />
+    <result column="account_type" jdbcType="INTEGER" property="accountType" />
+  </resultMap>
+
+  <!-- 定义常量 Base_Column_List -->
+  <sql id="Base_Column_List">
+    customer_id, user_id, eprise_wx_id, eprise_wx_name, cust_wx_id, cust_wx_name, sex,
+    cust_wx_head_url, verify_content, add_type, is_del, status, create_time, zombie_flag,
+    zombie_delete_time, zombie_status, source, account_type
+  </sql>
+
+  <select id="listCustomers" resultType="com.qianya.model.out.CustomerListDtoOut">
+    SELECT
+    customer_id AS  customerId,
+    cust_wx_id AS custWxId,
+    eprise_wx_id AS epriseWxId,
+    eprise_wx_name AS epriseWxName,
+    cust_wx_name AS custWxName,
+    cust_wx_head_url AS custWxHeadUrl,
+    verify_content AS verifyContent,
+    user_id AS userId,
+    add_type AS addType,
+    create_time AS createTime,
+    status AS status
+    from customer
+    WHERE
+    <if test="epriseWxIds != null and epriseWxIds.size() > 0">
+      eprise_wx_id IN
+      <foreach collection="epriseWxIds" item="epriseWxId" open="(" close=")" separator=",">
+        #{epriseWxId}
+      </foreach>
+      AND
+    </if>
+
+    <if test="serachContent != null and serachContent != ''">
+      (cust_wx_name LIKE CONCAT('%',#{serachContent},'%')   or    verify_content LIKE CONCAT('%',#{serachContent},'%'))    AND
+    </if>
+    <if test="isContain != null ">
+    <if test="isContain ==0">
+      <if test="containContentList != null and containContentList.size() > 0">
+        cust_wx_name IN
+        <foreach collection="containContentList" item="content" open="(" close=")" separator=",">
+          #{content}
+        </foreach>
+        AND
+      </if>
+    </if>
+      <if test="isContain ==1">
+        <if test="containContentList != null and containContentList.size() > 0">
+          cust_wx_name NOT IN
+          <foreach collection="containContentList" item="content" open="(" close=")" separator=",">
+            #{content}
+          </foreach>
+          AND
+        </if>
+      </if>
+    </if>
+
+    <if test=" userId != null">
+      user_id = #{userId} AND
+    </if>
+    <if test=" status != null">
+      status = #{status} AND
+    </if>
+    <if test=" addType != null">
+      add_type = #{addType} AND
+    </if>
+    <if test="sex != null">
+      sex = #{sex} and
+    </if>
+    <if test="addStartTime != null and addStartTime != ''">
+      create_time &gt;= #{addStartTime} and
+    </if>
+    <if test="addEndTime != null and addEndTime != ''">
+      create_time &lt;= #{addEndTime} and
+    </if>
+    <if test="accountType != null">
+      account_type = #{accountType} and
+    </if>
+    <if test="isAll == null">
+      zombie_flag = 0 and
+    </if>
+     is_del = 0
+    ORDER BY customer_id DESC
+  </select>
+
+
+  <update id="deleteCustomersSoftly">
+    update customer set is_del = 1 where customer_id in
+    <foreach item="id" index="index" collection="idList" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </update>
+
+
+  <insert id="insertBatchCustomers" parameterType="java.util.List">
+    INSERT INTO customer (user_id, eprise_wx_id, eprise_wx_name, cust_wx_id, cust_wx_name,
+    sex, cust_wx_head_url, verify_content, add_type, is_del, status, create_time, zombie_flag,account_type)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.userId}, #{item.epriseWxId}, #{item.epriseWxName}, #{item.custWxId}, #{item.custWxName},
+      #{item.sex}, #{item.custWxHeadUrl}, #{item.verifyContent}, #{item.addType}, #{item.isDel},
+      #{item.status}, #{item.createTime}, #{item.zombieFlag},#{item.accountType})
+    </foreach>
+  </insert>
+
+</mapper>

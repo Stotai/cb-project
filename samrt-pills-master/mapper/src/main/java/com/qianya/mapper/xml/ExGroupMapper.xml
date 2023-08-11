@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.ExGroupMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.ExGroup">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_wx_id" jdbcType="VARCHAR" property="groupWxId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_img" jdbcType="VARCHAR" property="groupImg" />
+    <result column="exrise_user_id" jdbcType="VARCHAR" property="exriseUserId" />
+    <result column="group_type" jdbcType="INTEGER" property="groupType" />
+    <result column="cust_num" jdbcType="INTEGER" property="custNum" />
+    <result column="grouping_id" jdbcType="INTEGER" property="groupingId" />
+    <result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="group_qr_code" jdbcType="VARCHAR" property="groupQrCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    group_id, group_wx_id, user_id, group_name, group_img, exrise_user_id, group_type, 
+    cust_num, grouping_id, create_user_id, create_time, group_qr_code
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.ExGroupCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ex_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ex_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ex_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.ExGroupCriteria">
+    delete from ex_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.ExGroup">
+    insert into ex_group (group_id, group_wx_id, user_id, 
+      group_name, group_img, exrise_user_id, 
+      group_type, cust_num, grouping_id, 
+      create_user_id, create_time, group_qr_code
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{groupWxId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{groupName,jdbcType=VARCHAR}, #{groupImg,jdbcType=VARCHAR}, #{exriseUserId,jdbcType=VARCHAR}, 
+      #{groupType,jdbcType=INTEGER}, #{custNum,jdbcType=INTEGER}, #{groupingId,jdbcType=INTEGER}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{groupQrCode,jdbcType=VARCHAR}
+      )
+    <selectKey keyProperty="groupId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.ExGroup">
+    insert into ex_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupWxId != null">
+        group_wx_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupImg != null">
+        group_img,
+      </if>
+      <if test="exriseUserId != null">
+        exrise_user_id,
+      </if>
+      <if test="groupType != null">
+        group_type,
+      </if>
+      <if test="custNum != null">
+        cust_num,
+      </if>
+      <if test="groupingId != null">
+        grouping_id,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="groupQrCode != null">
+        group_qr_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupWxId != null">
+        #{groupWxId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupImg != null">
+        #{groupImg,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseUserId != null">
+        #{exriseUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupType != null">
+        #{groupType,jdbcType=INTEGER},
+      </if>
+      <if test="custNum != null">
+        #{custNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupingId != null">
+        #{groupingId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupQrCode != null">
+        #{groupQrCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    <selectKey keyProperty="groupId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.ExGroupCriteria" resultType="java.lang.Long">
+    select count(*) from ex_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ex_group
+    <set>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupWxId != null">
+        group_wx_id = #{record.groupWxId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupImg != null">
+        group_img = #{record.groupImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exriseUserId != null">
+        exrise_user_id = #{record.exriseUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupType != null">
+        group_type = #{record.groupType,jdbcType=INTEGER},
+      </if>
+      <if test="record.custNum != null">
+        cust_num = #{record.custNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupingId != null">
+        grouping_id = #{record.groupingId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUserId != null">
+        create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupQrCode != null">
+        group_qr_code = #{record.groupQrCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ex_group
+    set group_id = #{record.groupId,jdbcType=INTEGER},
+      group_wx_id = #{record.groupWxId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      group_img = #{record.groupImg,jdbcType=VARCHAR},
+      exrise_user_id = #{record.exriseUserId,jdbcType=VARCHAR},
+      group_type = #{record.groupType,jdbcType=INTEGER},
+      cust_num = #{record.custNum,jdbcType=INTEGER},
+      grouping_id = #{record.groupingId,jdbcType=INTEGER},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      group_qr_code = #{record.groupQrCode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.ExGroup">
+    update ex_group
+    <set>
+      <if test="groupWxId != null">
+        group_wx_id = #{groupWxId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupImg != null">
+        group_img = #{groupImg,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseUserId != null">
+        exrise_user_id = #{exriseUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupType != null">
+        group_type = #{groupType,jdbcType=INTEGER},
+      </if>
+      <if test="custNum != null">
+        cust_num = #{custNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupingId != null">
+        grouping_id = #{groupingId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupQrCode != null">
+        group_qr_code = #{groupQrCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.ExGroup">
+    update ex_group
+    set group_wx_id = #{groupWxId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      group_img = #{groupImg,jdbcType=VARCHAR},
+      exrise_user_id = #{exriseUserId,jdbcType=VARCHAR},
+      group_type = #{groupType,jdbcType=INTEGER},
+      cust_num = #{custNum,jdbcType=INTEGER},
+      grouping_id = #{groupingId,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      group_qr_code = #{groupQrCode,jdbcType=VARCHAR}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into ex_group ( 
+    group_id,
+    group_wx_id,
+    user_id,
+    group_name,
+    group_img,
+    exrise_user_id,
+    group_type,
+    cust_num,
+    grouping_id,
+    create_user_id,
+    create_time,
+    group_qr_code
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.groupId,jdbcType=INTEGER}, 
+         #{record.groupWxId,jdbcType=VARCHAR}, 
+         #{record.userId,jdbcType=INTEGER}, 
+         #{record.groupName,jdbcType=VARCHAR}, 
+         #{record.groupImg,jdbcType=VARCHAR}, 
+         #{record.exriseUserId,jdbcType=VARCHAR}, 
+         #{record.groupType,jdbcType=INTEGER}, 
+         #{record.custNum,jdbcType=INTEGER}, 
+         #{record.groupingId,jdbcType=INTEGER}, 
+         #{record.createUserId,jdbcType=VARCHAR}, 
+         #{record.createTime,jdbcType=VARCHAR}, 
+         #{record.groupQrCode,jdbcType=VARCHAR}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into ex_group ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].groupId != null">
+        group_id,
+      </if>
+      <if test="recordColl[0].groupWxId != null">
+        group_wx_id,
+      </if>
+      <if test="recordColl[0].userId != null">
+        user_id,
+      </if>
+      <if test="recordColl[0].groupName != null">
+        group_name,
+      </if>
+      <if test="recordColl[0].groupImg != null">
+        group_img,
+      </if>
+      <if test="recordColl[0].exriseUserId != null">
+        exrise_user_id,
+      </if>
+      <if test="recordColl[0].groupType != null">
+        group_type,
+      </if>
+      <if test="recordColl[0].custNum != null">
+        cust_num,
+      </if>
+      <if test="recordColl[0].groupingId != null">
+        grouping_id,
+      </if>
+      <if test="recordColl[0].createUserId != null">
+        create_user_id,
+      </if>
+      <if test="recordColl[0].createTime != null">
+        create_time,
+      </if>
+      <if test="recordColl[0].groupQrCode != null">
+        group_qr_code,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.groupId != null">
+           #{record.groupId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.groupWxId != null">
+           #{record.groupWxId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.userId != null">
+           #{record.userId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.groupName != null">
+           #{record.groupName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.groupImg != null">
+           #{record.groupImg,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.exriseUserId != null">
+           #{record.exriseUserId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.groupType != null">
+           #{record.groupType,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.custNum != null">
+           #{record.custNum,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.groupingId != null">
+           #{record.groupingId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.createUserId != null">
+           #{record.createUserId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.createTime != null">
+           #{record.createTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.groupQrCode != null">
+           #{record.groupQrCode,jdbcType=VARCHAR}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ex_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

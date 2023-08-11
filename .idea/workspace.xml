@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8dd01ab6-ab76-4cd3-ab7a-d282a956eee0" name="Changes" comment="今日代码">
+      <change beforePath="$PROJECT_DIR$/samrt-pills-master/generate/src/main/resources/xml/MyBatisCodeGenerator-start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/samrt-pills-master/generate/src/main/resources/xml/MyBatisCodeGenerator-start.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/samrt-pills-master/service/task-service/src/main/java/com/qianya/task/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/samrt-pills-master/service/task-service/src/main/java/com/qianya/task/controller/TestController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../Program Files/apache-maven-3.9.1" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Q2V99fZNkkIj2Jc5mxoJIqnhNU" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/desktop/qiyeweixin/cb-project/cb-project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;21756b7e81378a3857e7cc9dc96a64cd&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;mongo&quot;
+    ]
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\work\cb-project\samrt-pills-master\mapper\src\main\java\com\qianya\mapper\xml" />
+      <recent name="E:\work\cb-project\samrt-pills-master\mapper\src\main\java\com\qianya\mapper" />
+      <recent name="E:\work\cb-project\samrt-pills-master\model\src\main\java\com\qianya\entity" />
+      <recent name="E:\work\cb-project\samrt-pills-master\service\qw-service\src\main\java\com\qianya\web\mapper\xml" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.TaskApplication">
+    <configuration name="BaseMybatis3Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BaseMybatis3Main" />
+      <module name="generate" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerServiceImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.qianya.web.service.impl.CustomerServiceImpl" />
+      <module name="qw-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qianya.web.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileManageApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="upload-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qianya.file.FileManageApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NettyServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="netty-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qianya.NettyServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QwServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="qw-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qianya.QwServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="task-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qianya.task.TaskApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZuulApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="zuul" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qianya.zuul.ZuulApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.BaseMybatis3Main" />
+      <item itemvalue="Application.CustomerServiceImpl" />
+      <item itemvalue="Spring Boot.NettyServiceApplication" />
+      <item itemvalue="Spring Boot.FileManageApplication" />
+      <item itemvalue="Spring Boot.ZuulApplication" />
+      <item itemvalue="Spring Boot.QwServiceApplication" />
+      <item itemvalue="Spring Boot.TaskApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BaseMybatis3Main" />
+        <item itemvalue="Application.CustomerServiceImpl" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8dd01ab6-ab76-4cd3-ab7a-d282a956eee0" name="Changes" comment="" />
+      <created>1684551511503</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684551511503</updated>
+      <workItem from="1684551513113" duration="7829000" />
+      <workItem from="1684642539739" duration="88000" />
+      <workItem from="1684847335019" duration="741000" />
+      <workItem from="1685021955210" duration="2486000" />
+      <workItem from="1685153663395" duration="116000" />
+      <workItem from="1685153831521" duration="106000" />
+      <workItem from="1685156861219" duration="11688000" />
+      <workItem from="1685171526631" duration="7861000" />
+      <workItem from="1685761393342" duration="12076000" />
+      <workItem from="1686362169199" duration="3740000" />
+      <workItem from="1686750120028" duration="5947000" />
+      <workItem from="1686916532952" duration="1252000" />
+      <workItem from="1686970038020" duration="8259000" />
+      <workItem from="1687178129960" duration="2308000" />
+      <workItem from="1687267302366" duration="573000" />
+      <workItem from="1687787335422" duration="969000" />
+      <workItem from="1687789605638" duration="1902000" />
+      <workItem from="1687792155544" duration="1247000" />
+      <workItem from="1687874439549" duration="1837000" />
+      <workItem from="1687955829792" duration="601000" />
+      <workItem from="1688177900008" duration="4022000" />
+      <workItem from="1688300412093" duration="4529000" />
+      <workItem from="1688389777686" duration="582000" />
+      <workItem from="1688780693259" duration="9704000" />
+      <workItem from="1688908543637" duration="2795000" />
+      <workItem from="1689384787630" duration="6420000" />
+      <workItem from="1689400282998" duration="3905000" />
+      <workItem from="1689679823647" duration="324000" />
+      <workItem from="1690091753265" duration="5393000" />
+      <workItem from="1690113712665" duration="4445000" />
+      <workItem from="1690166758500" duration="4563000" />
+      <workItem from="1690265666837" duration="4384000" />
+      <workItem from="1690272784170" duration="19057000" />
+      <workItem from="1691203356880" duration="2706000" />
+      <workItem from="1691459940746" duration="15380000" />
+      <workItem from="1691497174814" duration="1296000" />
+      <workItem from="1691543073514" duration="1127000" />
+      <workItem from="1691629745718" duration="964000" />
+      <workItem from="1691631018663" duration="24725000" />
+      <workItem from="1691715198706" duration="256000" />
+    </task>
+    <task id="LOCAL-00002" summary="还原">
+      <created>1684551675254</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684551675254</updated>
+    </task>
+    <task id="LOCAL-00003" summary="还原">
+      <created>1684551749173</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684551749173</updated>
+    </task>
+    <task id="LOCAL-00004" summary="还原">
+      <created>1684551971545</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684551971545</updated>
+    </task>
+    <task id="LOCAL-00005" summary="提交代码同步公司用">
+      <created>1684642621757</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1684642621757</updated>
+    </task>
+    <task id="LOCAL-00006" summary="升级">
+      <created>1685023904417</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685023904417</updated>
+    </task>
+    <task id="LOCAL-00007" summary="升级">
+      <created>1685023982938</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685023982938</updated>
+    </task>
+    <task id="LOCAL-00008" summary="升级">
+      <created>1685024097093</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685024097093</updated>
+    </task>
+    <task id="LOCAL-00009" summary="model">
+      <created>1685169232886</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1685169232886</updated>
+    </task>
+    <task id="LOCAL-00010" summary="分页">
+      <created>1685172325034</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1685172325034</updated>
+    </task>
+    <task id="LOCAL-00011" summary="配置">
+      <created>1685177695254</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1685177695254</updated>
+    </task>
+    <task id="LOCAL-00012" summary="配置相关">
+      <created>1685772394507</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1685772394507</updated>
+    </task>
+    <task id="LOCAL-00013" summary="配置相关">
+      <created>1685772626051</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1685772626051</updated>
+    </task>
+    <task id="LOCAL-00014" summary="升级">
+      <created>1685773988619</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1685773988619</updated>
+    </task>
+    <task id="LOCAL-00015" summary="配置相关">
+      <created>1685776106949</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1685776106949</updated>
+    </task>
+    <task id="LOCAL-00016" summary="配置相关">
+      <created>1685776142755</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1685776142755</updated>
+    </task>
+    <task id="LOCAL-00017" summary="不熟">
+      <created>1685781621919</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1685781621919</updated>
+    </task>
+    <task id="LOCAL-00018" summary="修复">
+      <created>1685783372920</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1685783372920</updated>
+    </task>
+    <task id="LOCAL-00019" summary="僵尸粉配置接口 其他接口修改">
+      <created>1686754782373</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1686754782373</updated>
+    </task>
+    <task id="LOCAL-00020" summary="配置相关">
+      <created>1686755847668</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1686755847668</updated>
+    </task>
+    <task id="LOCAL-00021" summary="配置相关">
+      <created>1686917215338</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1686917215338</updated>
+    </task>
+    <task id="LOCAL-00022" summary="gf">
+      <created>1686971421615</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1686971421615</updated>
+    </task>
+    <task id="LOCAL-00023" summary="今日代码">
+      <created>1686978976703</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1686978976703</updated>
+    </task>
+    <task id="LOCAL-00024" summary="登陆token改版 新增授权企业微信">
+      <created>1687185478269</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1687185478269</updated>
+    </task>
+    <task id="LOCAL-00025" summary="批量">
+      <created>1687789991616</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1687789991616</updated>
+    </task>
+    <task id="LOCAL-00026" summary="批量">
+      <created>1687790042314</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1687790042314</updated>
+    </task>
+    <task id="LOCAL-00027" summary="群">
+      <created>1687875766468</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1687875766468</updated>
+    </task>
+    <task id="LOCAL-00028" summary="今日代碼">
+      <created>1688300703314</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1688300703314</updated>
+    </task>
+    <task id="LOCAL-00029" summary="今日代碼">
+      <created>1688300775983</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1688300775983</updated>
+    </task>
+    <task id="LOCAL-00030" summary="群发">
+      <created>1688302490735</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1688302490735</updated>
+    </task>
+    <task id="LOCAL-00031" summary="群发">
+      <created>1688302615913</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1688302615913</updated>
+    </task>
+    <task id="LOCAL-00032" summary="群发">
+      <created>1688302802675</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1688302802675</updated>
+    </task>
+    <task id="LOCAL-00033" summary="今日代码">
+      <created>1688304942090</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1688304942090</updated>
+    </task>
+    <task id="LOCAL-00034" summary="今日代码">
+      <created>1688390200989</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1688390200989</updated>
+    </task>
+    <task id="LOCAL-00035" summary="mass">
+      <created>1688782015268</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1688782015268</updated>
+    </task>
+    <task id="LOCAL-00036" summary="立刻">
+      <created>1688786555737</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1688786555737</updated>
+    </task>
+    <task id="LOCAL-00037" summary="今日代码">
+      <created>1688789321383</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1688789321383</updated>
+    </task>
+    <task id="LOCAL-00038" summary="关联">
+      <created>1688793280225</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1688793280225</updated>
+    </task>
+    <task id="LOCAL-00039" summary="今日代码">
+      <created>1688797958217</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1688797958217</updated>
+    </task>
+    <task id="LOCAL-00040" summary="今日代码">
+      <created>1688798410367</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1688798410367</updated>
+    </task>
+    <task id="LOCAL-00041" summary="修复">
+      <created>1688912193949</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1688912193949</updated>
+    </task>
+    <task id="LOCAL-00042" summary="mq">
+      <created>1689392337175</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1689392337175</updated>
+    </task>
+    <task id="LOCAL-00043" summary="今日代码">
+      <created>1689392649581</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1689392649581</updated>
+    </task>
+    <task id="LOCAL-00044" summary="今日代码">
+      <created>1689393431686</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1689393431686</updated>
+    </task>
+    <task id="LOCAL-00045" summary="删除">
+      <created>1689402015226</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1689402015226</updated>
+    </task>
+    <task id="LOCAL-00046" summary="今日代码">
+      <created>1689403095114</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1689403095114</updated>
+    </task>
+    <task id="LOCAL-00047" summary="今日代码">
+      <created>1689405393167</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1689405393167</updated>
+    </task>
+    <task id="LOCAL-00048" summary="今日代码">
+      <created>1689405885082</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1689405885082</updated>
+    </task>
+    <task id="LOCAL-00049" summary="今日代码">
+      <created>1689406057601</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1689406057601</updated>
+    </task>
+    <task id="LOCAL-00050" summary="今日代码">
+      <created>1689406395663</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1689406395663</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ces" />
+    <MESSAGE value="还原" />
+    <MESSAGE value="提交代码同步公司用" />
+    <MESSAGE value="model" />
+    <MESSAGE value="分页" />
+    <MESSAGE value="配置" />
+    <MESSAGE value="升级" />
+    <MESSAGE value="不熟" />
+    <MESSAGE value="僵尸粉配置接口 其他接口修改" />
+    <MESSAGE value="配置相关" />
+    <MESSAGE value="gf" />
+    <MESSAGE value="登陆token改版 新增授权企业微信" />
+    <MESSAGE value="代碼" />
+    <MESSAGE value="批量" />
+    <MESSAGE value="群" />
+    <MESSAGE value="今日代碼" />
+    <MESSAGE value="群发" />
+    <MESSAGE value="mass" />
+    <MESSAGE value="立刻" />
+    <MESSAGE value="关联" />
+    <MESSAGE value="修复" />
+    <MESSAGE value="mq" />
+    <MESSAGE value="删除" />
+    <MESSAGE value="今日代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="今日代码" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

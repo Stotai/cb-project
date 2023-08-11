@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.PullConfigMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.PullConfig">
+    <id column="pull_config_id" jdbcType="INTEGER" property="pullConfigId" />
+    <result column="work_time" jdbcType="VARCHAR" property="workTime" />
+    <result column="wait_seconds" jdbcType="INTEGER" property="waitSeconds" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pull_config_id, work_time, wait_seconds, user_id
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.PullConfigCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pull_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pull_config
+    where pull_config_id = #{pullConfigId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pull_config
+    where pull_config_id = #{pullConfigId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.PullConfigCriteria">
+    delete from pull_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.PullConfig">
+    insert into pull_config (pull_config_id, work_time, wait_seconds, 
+      user_id)
+    values (#{pullConfigId,jdbcType=INTEGER}, #{workTime,jdbcType=VARCHAR}, #{waitSeconds,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER})
+    <selectKey keyProperty="pullConfigId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.PullConfig">
+    insert into pull_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pullConfigId != null">
+        pull_config_id,
+      </if>
+      <if test="workTime != null">
+        work_time,
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pullConfigId != null">
+        #{pullConfigId,jdbcType=INTEGER},
+      </if>
+      <if test="workTime != null">
+        #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="waitSeconds != null">
+        #{waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey keyProperty="pullConfigId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.PullConfigCriteria" resultType="java.lang.Long">
+    select count(*) from pull_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pull_config
+    <set>
+      <if test="record.pullConfigId != null">
+        pull_config_id = #{record.pullConfigId,jdbcType=INTEGER},
+      </if>
+      <if test="record.workTime != null">
+        work_time = #{record.workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waitSeconds != null">
+        wait_seconds = #{record.waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pull_config
+    set pull_config_id = #{record.pullConfigId,jdbcType=INTEGER},
+      work_time = #{record.workTime,jdbcType=VARCHAR},
+      wait_seconds = #{record.waitSeconds,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.PullConfig">
+    update pull_config
+    <set>
+      <if test="workTime != null">
+        work_time = #{workTime,jdbcType=VARCHAR},
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds = #{waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pull_config_id = #{pullConfigId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.PullConfig">
+    update pull_config
+    set work_time = #{workTime,jdbcType=VARCHAR},
+      wait_seconds = #{waitSeconds,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where pull_config_id = #{pullConfigId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into pull_config ( 
+    pull_config_id,
+    work_time,
+    wait_seconds,
+    user_id
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.pullConfigId,jdbcType=INTEGER}, 
+         #{record.workTime,jdbcType=VARCHAR}, 
+         #{record.waitSeconds,jdbcType=INTEGER}, 
+         #{record.userId,jdbcType=INTEGER}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into pull_config ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].pullConfigId != null">
+        pull_config_id,
+      </if>
+      <if test="recordColl[0].workTime != null">
+        work_time,
+      </if>
+      <if test="recordColl[0].waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="recordColl[0].userId != null">
+        user_id,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.pullConfigId != null">
+           #{record.pullConfigId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.workTime != null">
+           #{record.workTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.waitSeconds != null">
+           #{record.waitSeconds,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.userId != null">
+           #{record.userId,jdbcType=INTEGER}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pull_config
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

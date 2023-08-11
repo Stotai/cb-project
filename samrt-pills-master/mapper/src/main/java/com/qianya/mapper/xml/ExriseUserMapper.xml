@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.ExriseUserMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.ExriseUser">
+    <id column="exrise_user_id" jdbcType="INTEGER" property="exriseUserId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="exrise_wx_id" jdbcType="VARCHAR" property="exriseWxId" />
+    <result column="company_id" jdbcType="VARCHAR" property="companyId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="exrise_wx_name" jdbcType="VARCHAR" property="exriseWxName" />
+    <result column="wx_remark" jdbcType="VARCHAR" property="wxRemark" />
+    <result column="exrise_wx_url" jdbcType="VARCHAR" property="exriseWxUrl" />
+    <result column="customer_num" jdbcType="INTEGER" property="customerNum" />
+    <result column="group_num" jdbcType="INTEGER" property="groupNum" />
+    <result column="login_time" jdbcType="VARCHAR" property="loginTime" />
+    <result column="authorization_time" jdbcType="VARCHAR" property="authorizationTime" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="login_status" jdbcType="INTEGER" property="loginStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    exrise_user_id, user_id, exrise_wx_id, company_id, company_name, exrise_wx_name, 
+    wx_remark, exrise_wx_url, customer_num, group_num, login_time, authorization_time, 
+    is_delete, login_status
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.ExriseUserCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exrise_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exrise_user
+    where exrise_user_id = #{exriseUserId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exrise_user
+    where exrise_user_id = #{exriseUserId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.ExriseUserCriteria">
+    delete from exrise_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.ExriseUser">
+    insert into exrise_user (exrise_user_id, user_id, exrise_wx_id, 
+      company_id, company_name, exrise_wx_name, 
+      wx_remark, exrise_wx_url, customer_num, 
+      group_num, login_time, authorization_time, 
+      is_delete, login_status)
+    values (#{exriseUserId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{exriseWxId,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{exriseWxName,jdbcType=VARCHAR}, 
+      #{wxRemark,jdbcType=VARCHAR}, #{exriseWxUrl,jdbcType=VARCHAR}, #{customerNum,jdbcType=INTEGER}, 
+      #{groupNum,jdbcType=INTEGER}, #{loginTime,jdbcType=VARCHAR}, #{authorizationTime,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{loginStatus,jdbcType=INTEGER})
+    <selectKey keyProperty="exriseUserId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.ExriseUser">
+    insert into exrise_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exriseUserId != null">
+        exrise_user_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="exriseWxId != null">
+        exrise_wx_id,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="exriseWxName != null">
+        exrise_wx_name,
+      </if>
+      <if test="wxRemark != null">
+        wx_remark,
+      </if>
+      <if test="exriseWxUrl != null">
+        exrise_wx_url,
+      </if>
+      <if test="customerNum != null">
+        customer_num,
+      </if>
+      <if test="groupNum != null">
+        group_num,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="authorizationTime != null">
+        authorization_time,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="loginStatus != null">
+        login_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exriseUserId != null">
+        #{exriseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="exriseWxId != null">
+        #{exriseWxId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseWxName != null">
+        #{exriseWxName,jdbcType=VARCHAR},
+      </if>
+      <if test="wxRemark != null">
+        #{wxRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseWxUrl != null">
+        #{exriseWxUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNum != null">
+        #{customerNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupNum != null">
+        #{groupNum,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationTime != null">
+        #{authorizationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="loginStatus != null">
+        #{loginStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey keyProperty="exriseUserId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.ExriseUserCriteria" resultType="java.lang.Long">
+    select count(*) from exrise_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exrise_user
+    <set>
+      <if test="record.exriseUserId != null">
+        exrise_user_id = #{record.exriseUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.exriseWxId != null">
+        exrise_wx_id = #{record.exriseWxId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exriseWxName != null">
+        exrise_wx_name = #{record.exriseWxName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxRemark != null">
+        wx_remark = #{record.wxRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exriseWxUrl != null">
+        exrise_wx_url = #{record.exriseWxUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerNum != null">
+        customer_num = #{record.customerNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupNum != null">
+        group_num = #{record.groupNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorizationTime != null">
+        authorization_time = #{record.authorizationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginStatus != null">
+        login_status = #{record.loginStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exrise_user
+    set exrise_user_id = #{record.exriseUserId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      exrise_wx_id = #{record.exriseWxId,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      exrise_wx_name = #{record.exriseWxName,jdbcType=VARCHAR},
+      wx_remark = #{record.wxRemark,jdbcType=VARCHAR},
+      exrise_wx_url = #{record.exriseWxUrl,jdbcType=VARCHAR},
+      customer_num = #{record.customerNum,jdbcType=INTEGER},
+      group_num = #{record.groupNum,jdbcType=INTEGER},
+      login_time = #{record.loginTime,jdbcType=VARCHAR},
+      authorization_time = #{record.authorizationTime,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      login_status = #{record.loginStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.ExriseUser">
+    update exrise_user
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="exriseWxId != null">
+        exrise_wx_id = #{exriseWxId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseWxName != null">
+        exrise_wx_name = #{exriseWxName,jdbcType=VARCHAR},
+      </if>
+      <if test="wxRemark != null">
+        wx_remark = #{wxRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="exriseWxUrl != null">
+        exrise_wx_url = #{exriseWxUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="customerNum != null">
+        customer_num = #{customerNum,jdbcType=INTEGER},
+      </if>
+      <if test="groupNum != null">
+        group_num = #{groupNum,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizationTime != null">
+        authorization_time = #{authorizationTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="loginStatus != null">
+        login_status = #{loginStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where exrise_user_id = #{exriseUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.ExriseUser">
+    update exrise_user
+    set user_id = #{userId,jdbcType=INTEGER},
+      exrise_wx_id = #{exriseWxId,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      exrise_wx_name = #{exriseWxName,jdbcType=VARCHAR},
+      wx_remark = #{wxRemark,jdbcType=VARCHAR},
+      exrise_wx_url = #{exriseWxUrl,jdbcType=VARCHAR},
+      customer_num = #{customerNum,jdbcType=INTEGER},
+      group_num = #{groupNum,jdbcType=INTEGER},
+      login_time = #{loginTime,jdbcType=VARCHAR},
+      authorization_time = #{authorizationTime,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      login_status = #{loginStatus,jdbcType=INTEGER}
+    where exrise_user_id = #{exriseUserId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into exrise_user ( 
+    exrise_user_id,
+    user_id,
+    exrise_wx_id,
+    company_id,
+    company_name,
+    exrise_wx_name,
+    wx_remark,
+    exrise_wx_url,
+    customer_num,
+    group_num,
+    login_time,
+    authorization_time,
+    is_delete,
+    login_status
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.exriseUserId,jdbcType=INTEGER}, 
+         #{record.userId,jdbcType=INTEGER}, 
+         #{record.exriseWxId,jdbcType=VARCHAR}, 
+         #{record.companyId,jdbcType=VARCHAR}, 
+         #{record.companyName,jdbcType=VARCHAR}, 
+         #{record.exriseWxName,jdbcType=VARCHAR}, 
+         #{record.wxRemark,jdbcType=VARCHAR}, 
+         #{record.exriseWxUrl,jdbcType=VARCHAR}, 
+         #{record.customerNum,jdbcType=INTEGER}, 
+         #{record.groupNum,jdbcType=INTEGER}, 
+         #{record.loginTime,jdbcType=VARCHAR}, 
+         #{record.authorizationTime,jdbcType=VARCHAR}, 
+         #{record.isDelete,jdbcType=INTEGER}, 
+         #{record.loginStatus,jdbcType=INTEGER}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into exrise_user ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].exriseUserId != null">
+        exrise_user_id,
+      </if>
+      <if test="recordColl[0].userId != null">
+        user_id,
+      </if>
+      <if test="recordColl[0].exriseWxId != null">
+        exrise_wx_id,
+      </if>
+      <if test="recordColl[0].companyId != null">
+        company_id,
+      </if>
+      <if test="recordColl[0].companyName != null">
+        company_name,
+      </if>
+      <if test="recordColl[0].exriseWxName != null">
+        exrise_wx_name,
+      </if>
+      <if test="recordColl[0].wxRemark != null">
+        wx_remark,
+      </if>
+      <if test="recordColl[0].exriseWxUrl != null">
+        exrise_wx_url,
+      </if>
+      <if test="recordColl[0].customerNum != null">
+        customer_num,
+      </if>
+      <if test="recordColl[0].groupNum != null">
+        group_num,
+      </if>
+      <if test="recordColl[0].loginTime != null">
+        login_time,
+      </if>
+      <if test="recordColl[0].authorizationTime != null">
+        authorization_time,
+      </if>
+      <if test="recordColl[0].isDelete != null">
+        is_delete,
+      </if>
+      <if test="recordColl[0].loginStatus != null">
+        login_status,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.exriseUserId != null">
+           #{record.exriseUserId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.userId != null">
+           #{record.userId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.exriseWxId != null">
+           #{record.exriseWxId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.companyId != null">
+           #{record.companyId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.companyName != null">
+           #{record.companyName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.exriseWxName != null">
+           #{record.exriseWxName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.wxRemark != null">
+           #{record.wxRemark,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.exriseWxUrl != null">
+           #{record.exriseWxUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.customerNum != null">
+           #{record.customerNum,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.groupNum != null">
+           #{record.groupNum,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.loginTime != null">
+           #{record.loginTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.authorizationTime != null">
+           #{record.authorizationTime,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.isDelete != null">
+           #{record.isDelete,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.loginStatus != null">
+           #{record.loginStatus,jdbcType=INTEGER}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exrise_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

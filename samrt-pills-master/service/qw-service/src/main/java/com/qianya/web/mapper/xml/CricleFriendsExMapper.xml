@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.web.mapper.CricleFriendsExMapper">
+
+  <insert id="batchInsertCricleDetail" parameterType="java.util.List">
+    INSERT INTO cricle_detail (detail_type, item_type, cricle_id, item_content, sort, wait_seconds,
+    file_url, card_title, card_url, card_content, card_img_url)
+    VALUES
+    <foreach collection="details" item="detail" separator=",">
+      (#{detail.detailType}, #{detail.itemType}, #{detail.cricleId}, #{detail.itemContent},
+      #{detail.sort}, #{detail.waitSeconds}, #{detail.fileUrl}, #{detail.cardTitle},
+      #{detail.cardUrl}, #{detail.cardContent}, #{detail.cardImgUrl})
+    </foreach>
+  </insert>
+
+    <select id="getMassDraftDtoOutList" resultType="com.qianya.model.out.SchemeDraftDtoOut">
+
+        SELECT s.circle_id AS  schemeId,
+        s.circle_name   AS  schemeName,
+        u.phone  AS createUser,
+        s.create_time AS createTime
+        from cricle_friends s  left join  `user` u on s.user_id=u.user_id
+        where s.user_id=#{userId} and  s.save_type = 0 and s.is_del= 0
+        <if test="content !=null and content != ''">
+            AND  s.pull_name LIKE CONCAT('%', #{content}, '%')
+        </if>
+        order by s.create_time desc
+    </select>
+
+    <select id="searchCircleFriends" resultType="com.qianya.model.out.CircleFriendsDtoOut">
+        SELECT
+        circle_id AS circleId,
+        user_id AS userId,
+        exrise_wx_ids AS exriseWxIds,
+        circle_name AS circleName,
+        send_time AS sendTime,
+        send_type AS sendType,
+        send_num AS sendNum,
+        content_type AS contentType,
+        status,
+        execute_times AS executeTimes,
+        last_execust_time AS lastExecuteTime,
+        create_time AS createTime,
+        content,
+        cricle_type AS cricleType
+        FROM cricle_friends
+        WHERE
+        <if test="content != null and content != ''">
+            (content LIKE CONCAT('%', #{content}, '%') OR circle_name LIKE CONCAT('%', #{content}, '%'))
+        </if>
+        <if test="exriseWxIds != null and exriseWxIds.size() > 0">
+            AND exrise_wx_ids IN
+            <foreach collection="exriseWxIds" item="exriseWxId" open="(" separator="," close=")">
+                #{exriseWxId}
+            </foreach>
+        </if>
+        order by create_time desc
+    </select>
+
+</mapper>

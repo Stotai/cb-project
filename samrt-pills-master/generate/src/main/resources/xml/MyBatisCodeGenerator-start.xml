@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="qmcs" targetRuntime="MyBatis3">
+
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+
+		<plugin type="Mybatis3PluginByInsertBatch"></plugin>
+		<plugin type="Mybatis3PluginByInsertBatchSel"></plugin>
+		<plugin type="Mybatis3PluginByInsertReturn"></plugin>
+		<plugin type="Mybatis3PluginByLimit"></plugin>
+		<plugin type="Mybatis3PluginBySelectOne"></plugin>
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="false" />
+		</commentGenerator>
+
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"  connectionURL="jdbc:mysql://121.40.68.236:3306/jsp_purchase?useSSL=false" userId="dmsde" password="dmsdev008!M">
+         </jdbcConnection>-->
+
+ <jdbcConnection driverClass="com.mysql.jdbc.Driver"  connectionURL="jdbc:mysql://39.106.133.60:3306/cb_data?useSSL=false" userId="root" password="cb2023@.">
+ </jdbcConnection>
+    <javaTypeResolver>
+        <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+<!--		生成实体类 对应路劲为 C:\com.XXX-->
+		<javaModelGenerator targetPackage="com.qianya.entity"
+							targetProject="C:\">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+<!--		生成xml-->
+		<sqlMapGenerator targetPackage="com.qianya.xml"
+						 targetProject="C:\">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+<!--			生成mapper-->
+		<javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.qianya.mapper" targetProject="C:\">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+
+
+
+
+
+
+<!--		<table schema="t_group_work_config" tableName="t_group_work_config"></table>-->
+
+
+
+		<table schema="reply_config_detail" tableName="reply_config_detail"></table>
+
+
+	</context>
+
+</generatorConfiguration>

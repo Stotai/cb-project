@@ -1,0 +1,97 @@
+##读取配置参数
+config:
+  server-port: ${curr_port:8070}
+  app-name: zuul
+  config-url: ${curr_nacos_url:39.106.133.60:8848}
+  namespace: ${curr_namespace:adf4d8bb-545f-4b6b-98a0-56d9a2aa2def}
+  group: DEFAULT_GROUP
+  site: ${curr_site:defalut}
+##框架配置
+server:
+  port: 8070
+  tomcat:
+    max-threads: 800 #线程池最大线程数
+    accept-count: 1000 #等待线程数
+spring:
+  application:
+    name: ${config.app-name}
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        server-addr: ${config.config-url}
+        file-extension: yml
+        namespace: ${config.namespace}
+        prefix: ${config.app-name}
+        group: ${config.group}
+      discovery:
+        server-addr: ${config.config-url}
+        namespace:  ${config.namespace}
+        group: ${config.group}
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  servlet:
+    multipart:
+      max-file-size: 150MB
+      max-request-size: 150MB
+  redis:
+    host: 39.106.133.60
+    port: 6379
+    password: cb2023.@
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1
+ribbon:
+  ConnectTimeout: 3000 #连接超时5秒
+  ReadTimeout: 60000 #读取数据超时15秒
+  ServerListRefreshInterval: 2000 #ribbon缓存时间2秒
+  OkToRetryOnAllOperations: false #对所有的操作请求都进行重试，默认为false
+  MaxAutoRetries: 0 #同一服务器重试次数
+  MaxAutoRetriesNextServer: 0 #换实例重试次数
+  restclient:
+    enabled: true #开启重试
+feign:
+  hystrix:
+    enabled: true #开启熔断
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 #并发执行的最大线程数,默认10
+      maxQueueSize: 200 #BlockingQueue的最大队列数，默认值-1
+      queueSizeRejectionThreshold: 200 #maxQueueSize没达到但超过queueSizeRejectionThreshold该值后,请求也会被拒绝,默认值5
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 65000 #20秒
+      circuitBreaker: #断路器
+        requestVolumeThreshold: 100 #在10秒内达到此数量的失败后,打开断路器
+        sleepWindowInMilliseconds: 10000 #打开断路器10秒后开始尝试是否恢复
+        errorThresholdPercentage: 50 #错误百分比,超过50%打开断路器
+zuul:
+  retryable: false
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin
+  ignored-services: "*"
+  routes:
+    qw-service:
+      path: /qw-service/**
+      serviceId: qw-service
+      strip-prefix: true
+    system-file:
+      path: /system-file/**
+      serviceId: system-file
+      strip-prefix: true
+    task-service:
+      path: /task-service/**
+      serviceId: task-service
+      strip-prefix: true
+  prefix: /front

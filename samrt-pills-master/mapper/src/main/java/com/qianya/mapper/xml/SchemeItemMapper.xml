@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianya.mapper.SchemeItemMapper">
+  <resultMap id="BaseResultMap" type="com.qianya.entity.SchemeItem">
+    <id column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="scheme_id" jdbcType="INTEGER" property="schemeId" />
+    <result column="item_type" jdbcType="INTEGER" property="itemType" />
+    <result column="item_content" jdbcType="VARCHAR" property="itemContent" />
+    <result column="wait_seconds" jdbcType="INTEGER" property="waitSeconds" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+    <result column="card_title" jdbcType="VARCHAR" property="cardTitle" />
+    <result column="card_url" jdbcType="VARCHAR" property="cardUrl" />
+    <result column="card_content" jdbcType="VARCHAR" property="cardContent" />
+    <result column="card_img_url" jdbcType="VARCHAR" property="cardImgUrl" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="page_path" jdbcType="VARCHAR" property="pagePath" />
+    <result column="file_id" jdbcType="VARCHAR" property="fileId" />
+    <result column="aes_key" jdbcType="VARCHAR" property="aesKey" />
+    <result column="md5" jdbcType="VARCHAR" property="md5" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="video_desc" jdbcType="VARCHAR" property="videoDesc" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="cover_url" jdbcType="VARCHAR" property="coverUrl" />
+    <result column="feed_type" jdbcType="VARCHAR" property="feedType" />
+    <result column="thumb_url" jdbcType="VARCHAR" property="thumbUrl" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="extras" jdbcType="VARCHAR" property="extras" />
+    <result column="group_ids" jdbcType="VARCHAR" property="groupIds" />
+    <result column="urge_exit_type" jdbcType="INTEGER" property="urgeExitType" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    item_id, scheme_id, item_type, item_content, wait_seconds, file_url, card_title, 
+    card_url, card_content, card_img_url, user_name, app_id, app_name, title, page_path, 
+    file_id, aes_key, md5, size, nick_name, video_desc, avatar, cover_url, feed_type, 
+    thumb_url, url, extras, group_ids, urge_exit_type, is_delete, sort
+  </sql>
+  <select id="selectByExample" parameterType="com.qianya.entity.SchemeItemCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from scheme_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scheme_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scheme_item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qianya.entity.SchemeItemCriteria">
+    delete from scheme_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qianya.entity.SchemeItem">
+    insert into scheme_item (item_id, scheme_id, item_type, 
+      item_content, wait_seconds, file_url, 
+      card_title, card_url, card_content, 
+      card_img_url, user_name, app_id, 
+      app_name, title, page_path, 
+      file_id, aes_key, md5, 
+      size, nick_name, video_desc, 
+      avatar, cover_url, feed_type, 
+      thumb_url, url, extras, 
+      group_ids, urge_exit_type, is_delete, 
+      sort)
+    values (#{itemId,jdbcType=INTEGER}, #{schemeId,jdbcType=INTEGER}, #{itemType,jdbcType=INTEGER}, 
+      #{itemContent,jdbcType=VARCHAR}, #{waitSeconds,jdbcType=INTEGER}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{cardTitle,jdbcType=VARCHAR}, #{cardUrl,jdbcType=VARCHAR}, #{cardContent,jdbcType=VARCHAR}, 
+      #{cardImgUrl,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+      #{appName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{pagePath,jdbcType=VARCHAR}, 
+      #{fileId,jdbcType=VARCHAR}, #{aesKey,jdbcType=VARCHAR}, #{md5,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{videoDesc,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{feedType,jdbcType=VARCHAR}, 
+      #{thumbUrl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{extras,jdbcType=VARCHAR}, 
+      #{groupIds,jdbcType=VARCHAR}, #{urgeExitType,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER})
+    <selectKey keyProperty="itemId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterType="com.qianya.entity.SchemeItem">
+    insert into scheme_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="schemeId != null">
+        scheme_id,
+      </if>
+      <if test="itemType != null">
+        item_type,
+      </if>
+      <if test="itemContent != null">
+        item_content,
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+      <if test="cardTitle != null">
+        card_title,
+      </if>
+      <if test="cardUrl != null">
+        card_url,
+      </if>
+      <if test="cardContent != null">
+        card_content,
+      </if>
+      <if test="cardImgUrl != null">
+        card_img_url,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="appName != null">
+        app_name,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="pagePath != null">
+        page_path,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="aesKey != null">
+        aes_key,
+      </if>
+      <if test="md5 != null">
+        md5,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="videoDesc != null">
+        video_desc,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="coverUrl != null">
+        cover_url,
+      </if>
+      <if test="feedType != null">
+        feed_type,
+      </if>
+      <if test="thumbUrl != null">
+        thumb_url,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="extras != null">
+        extras,
+      </if>
+      <if test="groupIds != null">
+        group_ids,
+      </if>
+      <if test="urgeExitType != null">
+        urge_exit_type,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="schemeId != null">
+        #{schemeId,jdbcType=INTEGER},
+      </if>
+      <if test="itemType != null">
+        #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="itemContent != null">
+        #{itemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="waitSeconds != null">
+        #{waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTitle != null">
+        #{cardTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cardUrl != null">
+        #{cardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardContent != null">
+        #{cardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImgUrl != null">
+        #{cardImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pagePath != null">
+        #{pagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="aesKey != null">
+        #{aesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null">
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        #{videoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="coverUrl != null">
+        #{coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="feedType != null">
+        #{feedType,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbUrl != null">
+        #{thumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="extras != null">
+        #{extras,jdbcType=VARCHAR},
+      </if>
+      <if test="groupIds != null">
+        #{groupIds,jdbcType=VARCHAR},
+      </if>
+      <if test="urgeExitType != null">
+        #{urgeExitType,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+    <selectKey keyProperty="itemId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterType="com.qianya.entity.SchemeItemCriteria" resultType="java.lang.Long">
+    select count(*) from scheme_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update scheme_item
+    <set>
+      <if test="record.itemId != null">
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.schemeId != null">
+        scheme_id = #{record.schemeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemType != null">
+        item_type = #{record.itemType,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemContent != null">
+        item_content = #{record.itemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.waitSeconds != null">
+        wait_seconds = #{record.waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileUrl != null">
+        file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardTitle != null">
+        card_title = #{record.cardTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardUrl != null">
+        card_url = #{record.cardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardContent != null">
+        card_content = #{record.cardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardImgUrl != null">
+        card_img_url = #{record.cardImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appId != null">
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appName != null">
+        app_name = #{record.appName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pagePath != null">
+        page_path = #{record.pagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileId != null">
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aesKey != null">
+        aes_key = #{record.aesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.md5 != null">
+        md5 = #{record.md5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDesc != null">
+        video_desc = #{record.videoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coverUrl != null">
+        cover_url = #{record.coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedType != null">
+        feed_type = #{record.feedType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumbUrl != null">
+        thumb_url = #{record.thumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extras != null">
+        extras = #{record.extras,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupIds != null">
+        group_ids = #{record.groupIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgeExitType != null">
+        urge_exit_type = #{record.urgeExitType,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update scheme_item
+    set item_id = #{record.itemId,jdbcType=INTEGER},
+      scheme_id = #{record.schemeId,jdbcType=INTEGER},
+      item_type = #{record.itemType,jdbcType=INTEGER},
+      item_content = #{record.itemContent,jdbcType=VARCHAR},
+      wait_seconds = #{record.waitSeconds,jdbcType=INTEGER},
+      file_url = #{record.fileUrl,jdbcType=VARCHAR},
+      card_title = #{record.cardTitle,jdbcType=VARCHAR},
+      card_url = #{record.cardUrl,jdbcType=VARCHAR},
+      card_content = #{record.cardContent,jdbcType=VARCHAR},
+      card_img_url = #{record.cardImgUrl,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      app_name = #{record.appName,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      page_path = #{record.pagePath,jdbcType=VARCHAR},
+      file_id = #{record.fileId,jdbcType=VARCHAR},
+      aes_key = #{record.aesKey,jdbcType=VARCHAR},
+      md5 = #{record.md5,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      video_desc = #{record.videoDesc,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      cover_url = #{record.coverUrl,jdbcType=VARCHAR},
+      feed_type = #{record.feedType,jdbcType=VARCHAR},
+      thumb_url = #{record.thumbUrl,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      extras = #{record.extras,jdbcType=VARCHAR},
+      group_ids = #{record.groupIds,jdbcType=VARCHAR},
+      urge_exit_type = #{record.urgeExitType,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qianya.entity.SchemeItem">
+    update scheme_item
+    <set>
+      <if test="schemeId != null">
+        scheme_id = #{schemeId,jdbcType=INTEGER},
+      </if>
+      <if test="itemType != null">
+        item_type = #{itemType,jdbcType=INTEGER},
+      </if>
+      <if test="itemContent != null">
+        item_content = #{itemContent,jdbcType=VARCHAR},
+      </if>
+      <if test="waitSeconds != null">
+        wait_seconds = #{waitSeconds,jdbcType=INTEGER},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardTitle != null">
+        card_title = #{cardTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="cardUrl != null">
+        card_url = #{cardUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cardContent != null">
+        card_content = #{cardContent,jdbcType=VARCHAR},
+      </if>
+      <if test="cardImgUrl != null">
+        card_img_url = #{cardImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pagePath != null">
+        page_path = #{pagePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="aesKey != null">
+        aes_key = #{aesKey,jdbcType=VARCHAR},
+      </if>
+      <if test="md5 != null">
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDesc != null">
+        video_desc = #{videoDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="coverUrl != null">
+        cover_url = #{coverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="feedType != null">
+        feed_type = #{feedType,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbUrl != null">
+        thumb_url = #{thumbUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="extras != null">
+        extras = #{extras,jdbcType=VARCHAR},
+      </if>
+      <if test="groupIds != null">
+        group_ids = #{groupIds,jdbcType=VARCHAR},
+      </if>
+      <if test="urgeExitType != null">
+        urge_exit_type = #{urgeExitType,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qianya.entity.SchemeItem">
+    update scheme_item
+    set scheme_id = #{schemeId,jdbcType=INTEGER},
+      item_type = #{itemType,jdbcType=INTEGER},
+      item_content = #{itemContent,jdbcType=VARCHAR},
+      wait_seconds = #{waitSeconds,jdbcType=INTEGER},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      card_title = #{cardTitle,jdbcType=VARCHAR},
+      card_url = #{cardUrl,jdbcType=VARCHAR},
+      card_content = #{cardContent,jdbcType=VARCHAR},
+      card_img_url = #{cardImgUrl,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      page_path = #{pagePath,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=VARCHAR},
+      aes_key = #{aesKey,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=VARCHAR},
+      size = #{size,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      video_desc = #{videoDesc,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      cover_url = #{coverUrl,jdbcType=VARCHAR},
+      feed_type = #{feedType,jdbcType=VARCHAR},
+      thumb_url = #{thumbUrl,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      extras = #{extras,jdbcType=VARCHAR},
+      group_ids = #{groupIds,jdbcType=VARCHAR},
+      urge_exit_type = #{urgeExitType,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER}
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </update>
+  <insert id="insertBatch">
+    insert into scheme_item ( 
+    item_id,
+    scheme_id,
+    item_type,
+    item_content,
+    wait_seconds,
+    file_url,
+    card_title,
+    card_url,
+    card_content,
+    card_img_url,
+    user_name,
+    app_id,
+    app_name,
+    title,
+    page_path,
+    file_id,
+    aes_key,
+    md5,
+    size,
+    nick_name,
+    video_desc,
+    avatar,
+    cover_url,
+    feed_type,
+    thumb_url,
+    url,
+    extras,
+    group_ids,
+    urge_exit_type,
+    is_delete,
+    sort
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+         #{record.itemId,jdbcType=INTEGER}, 
+         #{record.schemeId,jdbcType=INTEGER}, 
+         #{record.itemType,jdbcType=INTEGER}, 
+         #{record.itemContent,jdbcType=VARCHAR}, 
+         #{record.waitSeconds,jdbcType=INTEGER}, 
+         #{record.fileUrl,jdbcType=VARCHAR}, 
+         #{record.cardTitle,jdbcType=VARCHAR}, 
+         #{record.cardUrl,jdbcType=VARCHAR}, 
+         #{record.cardContent,jdbcType=VARCHAR}, 
+         #{record.cardImgUrl,jdbcType=VARCHAR}, 
+         #{record.userName,jdbcType=VARCHAR}, 
+         #{record.appId,jdbcType=VARCHAR}, 
+         #{record.appName,jdbcType=VARCHAR}, 
+         #{record.title,jdbcType=VARCHAR}, 
+         #{record.pagePath,jdbcType=VARCHAR}, 
+         #{record.fileId,jdbcType=VARCHAR}, 
+         #{record.aesKey,jdbcType=VARCHAR}, 
+         #{record.md5,jdbcType=VARCHAR}, 
+         #{record.size,jdbcType=VARCHAR}, 
+         #{record.nickName,jdbcType=VARCHAR}, 
+         #{record.videoDesc,jdbcType=VARCHAR}, 
+         #{record.avatar,jdbcType=VARCHAR}, 
+         #{record.coverUrl,jdbcType=VARCHAR}, 
+         #{record.feedType,jdbcType=VARCHAR}, 
+         #{record.thumbUrl,jdbcType=VARCHAR}, 
+         #{record.url,jdbcType=VARCHAR}, 
+         #{record.extras,jdbcType=VARCHAR}, 
+         #{record.groupIds,jdbcType=VARCHAR}, 
+         #{record.urgeExitType,jdbcType=INTEGER}, 
+         #{record.isDelete,jdbcType=INTEGER}, 
+         #{record.sort,jdbcType=INTEGER}, 
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <insert id="insertBatchSel">
+    insert into scheme_item ( 
+    <trim suffixOverrides=",">
+      <if test="recordColl[0].itemId != null">
+        item_id,
+      </if>
+      <if test="recordColl[0].schemeId != null">
+        scheme_id,
+      </if>
+      <if test="recordColl[0].itemType != null">
+        item_type,
+      </if>
+      <if test="recordColl[0].itemContent != null">
+        item_content,
+      </if>
+      <if test="recordColl[0].waitSeconds != null">
+        wait_seconds,
+      </if>
+      <if test="recordColl[0].fileUrl != null">
+        file_url,
+      </if>
+      <if test="recordColl[0].cardTitle != null">
+        card_title,
+      </if>
+      <if test="recordColl[0].cardUrl != null">
+        card_url,
+      </if>
+      <if test="recordColl[0].cardContent != null">
+        card_content,
+      </if>
+      <if test="recordColl[0].cardImgUrl != null">
+        card_img_url,
+      </if>
+      <if test="recordColl[0].userName != null">
+        user_name,
+      </if>
+      <if test="recordColl[0].appId != null">
+        app_id,
+      </if>
+      <if test="recordColl[0].appName != null">
+        app_name,
+      </if>
+      <if test="recordColl[0].title != null">
+        title,
+      </if>
+      <if test="recordColl[0].pagePath != null">
+        page_path,
+      </if>
+      <if test="recordColl[0].fileId != null">
+        file_id,
+      </if>
+      <if test="recordColl[0].aesKey != null">
+        aes_key,
+      </if>
+      <if test="recordColl[0].md5 != null">
+        md5,
+      </if>
+      <if test="recordColl[0].size != null">
+        size,
+      </if>
+      <if test="recordColl[0].nickName != null">
+        nick_name,
+      </if>
+      <if test="recordColl[0].videoDesc != null">
+        video_desc,
+      </if>
+      <if test="recordColl[0].avatar != null">
+        avatar,
+      </if>
+      <if test="recordColl[0].coverUrl != null">
+        cover_url,
+      </if>
+      <if test="recordColl[0].feedType != null">
+        feed_type,
+      </if>
+      <if test="recordColl[0].thumbUrl != null">
+        thumb_url,
+      </if>
+      <if test="recordColl[0].url != null">
+        url,
+      </if>
+      <if test="recordColl[0].extras != null">
+        extras,
+      </if>
+      <if test="recordColl[0].groupIds != null">
+        group_ids,
+      </if>
+      <if test="recordColl[0].urgeExitType != null">
+        urge_exit_type,
+      </if>
+      <if test="recordColl[0].isDelete != null">
+        is_delete,
+      </if>
+      <if test="recordColl[0].sort != null">
+        sort,
+      </if>
+    </trim>
+     ) values 
+    <foreach collection="recordColl" item="record" separator=",">
+      (
+      <trim suffixOverrides=",">
+        <if test="record.itemId != null">
+           #{record.itemId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.schemeId != null">
+           #{record.schemeId,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.itemType != null">
+           #{record.itemType,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.itemContent != null">
+           #{record.itemContent,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.waitSeconds != null">
+           #{record.waitSeconds,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.fileUrl != null">
+           #{record.fileUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardTitle != null">
+           #{record.cardTitle,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardUrl != null">
+           #{record.cardUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardContent != null">
+           #{record.cardContent,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.cardImgUrl != null">
+           #{record.cardImgUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.userName != null">
+           #{record.userName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.appId != null">
+           #{record.appId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.appName != null">
+           #{record.appName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.title != null">
+           #{record.title,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.pagePath != null">
+           #{record.pagePath,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.fileId != null">
+           #{record.fileId,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.aesKey != null">
+           #{record.aesKey,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.md5 != null">
+           #{record.md5,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.size != null">
+           #{record.size,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.nickName != null">
+           #{record.nickName,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.videoDesc != null">
+           #{record.videoDesc,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.avatar != null">
+           #{record.avatar,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.coverUrl != null">
+           #{record.coverUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.feedType != null">
+           #{record.feedType,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.thumbUrl != null">
+           #{record.thumbUrl,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.url != null">
+           #{record.url,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.extras != null">
+           #{record.extras,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.groupIds != null">
+           #{record.groupIds,jdbcType=VARCHAR}, 
+        </if>
+        <if test="record.urgeExitType != null">
+           #{record.urgeExitType,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.isDelete != null">
+           #{record.isDelete,jdbcType=INTEGER}, 
+        </if>
+        <if test="record.sort != null">
+           #{record.sort,jdbcType=INTEGER}, 
+        </if>
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <select id="selectByExampleForOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from scheme_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
